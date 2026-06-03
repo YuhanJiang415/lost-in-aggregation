@@ -17,7 +17,13 @@ __pycache__/
 69fca4a0e192a8e6364e86c6/
 _paper_verify/
 
-# ---- Large benchmark data: shipped as GitHub Release assets, not in-repo ----
-mazes/*.json
-!mazes/summary.json
+# ---- Benchmark data: shipped as GitHub Release assets, not in-repo ----
+mazes/
 exp_output/
+
+# ---- Project code: not part of the published website (released separately later) ----
+scripts/
+maze_generator/
+input_formatter/
+analysis/
+robot.svg

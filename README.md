@@ -28,19 +28,18 @@ per-file download table and the JSON schema.
 
 ```
 mazes_s{3,5,7,10,15,20,30}.json   # 150 mazes each
-summary.json                       # corpus manifest (in this repo)
+summary.json                       # corpus manifest (included in the Release)
 ```
 
 ## Repository layout
 
 ```
-docs/              # project homepage (GitHub Pages, served from /docs)
-mazes/summary.json # corpus manifest (full JSON shipped via Releases)
-maze_generator/    # maze generation + topology annotation
-input_formatter/   # the four input encoders (Words / Coordinate / Map / Picture)
-analysis/          # results loading helpers
-scripts/           # figure, thumbnail, and animation generation
+docs/   # project homepage (GitHub Pages, served from /docs)
 ```
+
+The maze generator, input encoders, and evaluation/figure code are not yet
+published; they will be released here. The benchmark data is available now via
+[Releases](https://github.com/YuhanJiang415/lost-in-aggregation/releases/tag/v0.1).
 
 ## Citation
 

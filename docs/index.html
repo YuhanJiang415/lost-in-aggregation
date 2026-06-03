@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lost in Aggregation — A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation</title>
+<meta name="description" content="A cognitively grounded, multi-scale diagnostic benchmark for LLM spatial navigation: 1,050 topology-annotated mazes across seven sizes and three difficulty tiers." />
+
+<!-- Social preview -->
+<meta property="og:title" content="Lost in Aggregation: A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation" />
+<meta property="og:description" content="Where do LLMs get lost in spatial navigation? A diagnostic benchmark of 1,050 topology-annotated mazes that localizes the failure to cross-scale aggregation." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/figures/framework_intro.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<style>
+  :root {
+    --blue:   #3F70C8;
+    --blue-d: #2c4f8f;
+    --red:    #E84B3A;
+    --ink:    #1a1d24;
+    --muted:  #5b6472;
+    --line:   #e4e8ef;
+    --bg:     #ffffff;
+    --bg-alt: #f6f8fb;
+    --chip:   #eef2f8;
+    --radius: 14px;
+    --maxw:   1080px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+  /* ---------- header ---------- */
+  header.hero {
+    background:
+      radial-gradient(1100px 380px at 50% -120px, rgba(63,112,200,.10), transparent 60%),
+      var(--bg);
+    border-bottom: 1px solid var(--line);
+    padding: 54px 0 40px;
+    text-align: center;
+  }
+  .venue {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: .04em;
+    color: var(--blue-d);
+    background: var(--chip);
+    border: 1px solid var(--line);
+    padding: 5px 13px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+  h1.title {
+    font-size: clamp(26px, 4.4vw, 42px);
+    line-height: 1.16;
+    margin: 0 auto 6px;
+    max-width: 880px;
+    letter-spacing: -0.01em;
+  }
+  h1.title .sub {
+    display: block;
+    font-size: clamp(17px, 2.4vw, 23px);
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 10px;
+    letter-spacing: 0;
+  }
+  .authors {
+    margin: 22px auto 4px;
+    font-size: 18px;
+    max-width: 760px;
+  }
+  .authors a { color: var(--ink); font-weight: 600; }
+  .authors sup { color: var(--blue); font-weight: 700; }
+  .affil {
+    color: var(--muted);
+    font-size: 14.5px;
+    margin: 6px auto 2px;
+    max-width: 720px;
+  }
+  .note { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+  /* ---------- link buttons ---------- */
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11px;
+    justify-content: center;
+    margin: 28px 0 4px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ink);
+    color: #fff;
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid var(--ink);
+    transition: transform .08s ease, box-shadow .15s ease;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(26,29,36,.16); }
+  .btn.alt { background: #fff; color: var(--ink); border-color: var(--line); }
+  .btn.alt:hover { border-color: #c8d1de; }
+  .btn .ico { font-size: 16px; line-height: 1; }
+
+  /* ---------- sections ---------- */
+  section { padding: 52px 0; border-bottom: 1px solid var(--line); }
+  section.alt { background: var(--bg-alt); }
+  h2.sec {
+    font-size: clamp(21px, 3vw, 28px);
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  h2.sec .kicker {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+  .lead { color: var(--muted); max-width: 760px; margin: 0 0 26px; font-size: 16.5px; }
+  p { margin: 0 0 16px; }
+
+  figure { margin: 0; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 10px; }
+  figure.framed img { border: 1px solid var(--line); background: #fff; }
+  figcaption { color: var(--muted); font-size: 14px; margin-top: 10px; }
+  figcaption b { color: var(--ink); }
+
+  /* ---------- stat strip ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .stat {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 18px;
+    text-align: center;
+  }
+  .stat .num { font-size: 30px; font-weight: 800; color: var(--blue-d); letter-spacing: -0.02em; }
+  .stat .lab { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+
+  /* ---------- TL;DR cards ---------- */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 22px 20px;
+  }
+  .card .rq { font-size: 13px; font-weight: 700; color: var(--blue); letter-spacing: .05em; }
+  .card h3 { font-size: 18px; margin: 6px 0 10px; }
+  .card p { font-size: 14.5px; color: var(--muted); margin: 0; }
+  .card .punch { color: var(--ink); font-weight: 600; }
+
+  /* ---------- maze gallery ---------- */
+  .mazes {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px;
+    align-items: end;
+  }
+  .mz { text-align: center; }
+  .mz img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: #fff;
+    padding: 5px;
+  }
+  .mz .cap { font-size: 12.5px; color: var(--muted); margin-top: 7px; font-variant-numeric: tabular-nums; }
+  .legend { display: flex; gap: 20px; justify-content: center; margin-top: 22px; font-size: 14px; color: var(--muted); flex-wrap: wrap; }
+  .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: middle; margin-right: 6px; }
+  .dash { display: inline-block; width: 22px; height: 0; border-top: 2.5px dashed #9aa7b8; vertical-align: middle; margin-right: 7px; }
+
+  /* ---------- figure rows ---------- */
+  .figrow { display: grid; grid-template-columns: 1fr; gap: 34px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+
+  /* ---------- animated GIFs ---------- */
+  .feature { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 36px; align-items: center; }
+  .gif { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+  .gifgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 34px; }
+  .gifcard { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 12px 16px; }
+  .gifcard .gif { border: 0; border-radius: 9px; }
+  .gifcard h4 { margin: 12px 4px 4px; font-size: 15.5px; }
+  .gifcard h4 .lvl { font-size: 11.5px; font-weight: 700; letter-spacing: .04em; padding: 2px 8px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
+  .lvl.fine { color: #b23a2c; background: #fde8e4; }
+  .lvl.meso { color: #8a5a00; background: #fceccf; }
+  .gifcard p { margin: 4px 4px 0; font-size: 13.5px; color: var(--muted); }
+
+  /* ---------- data downloads ---------- */
+  table.dl { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  table.dl th, table.dl td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+  table.dl th { background: var(--bg-alt); font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+  table.dl tr:last-child td { border-bottom: 0; }
+  table.dl td.num, table.dl th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .schema {
+    background: #0f1320;
+    color: #e7ecf5;
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.6;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .schema .k { color: #82aaff; }
+  .schema .s { color: #c3e88d; }
+  .schema .c { color: #7886a0; }
+
+  .callout {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--blue);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 14.5px;
+    color: var(--muted);
+    margin-top: 20px;
+  }
+
+  /* ---------- bibtex ---------- */
+  pre.bib {
+    background: #0f1320;
+    color: #e7ecf5;
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.55;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    margin: 0;
+  }
+  .copybar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .copybtn { cursor: pointer; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 7px 13px; font-size: 13px; font-weight: 600; color: var(--ink); }
+  .copybtn:hover { border-color: #c8d1de; }
+
+  footer { padding: 34px 0 48px; text-align: center; color: var(--muted); font-size: 13.5px; }
+  footer a { color: var(--muted); text-decoration: underline; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .cards { grid-template-columns: 1fr; }
+    .two { grid-template-columns: 1fr; }
+    .mazes { grid-template-columns: repeat(4, 1fr); }
+    .feature { grid-template-columns: 1fr; gap: 22px; }
+    .gifgrid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .mazes { grid-template-columns: repeat(3, 1fr); }
+    .links { gap: 8px; }
+    .btn { padding: 10px 14px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="venue">ACM SIGSPATIAL 2026 · Benchmark Track</span>
+    <h1 class="title">
+      Lost in Aggregation
+      <span class="sub">A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation</span>
+    </h1>
+
+    <div class="authors">
+      <a href="mailto:yuhan.jiang@tum.de">Yuhan Jiang</a><sup>1</sup>,
+      <a href="mailto:pengluo@mit.edu">Peng Luo</a><sup>2,&#9993;</sup>,
+      <a href="mailto:liqiu.meng@tum.de">Liqiu Meng</a><sup>1</sup>
+    </div>
+    <div class="affil"><sup>1</sup>Technical University of Munich &nbsp;·&nbsp; <sup>2</sup>Massachusetts Institute of Technology</div>
+    <div class="note">&#9993; Corresponding author</div>
+
+    <!-- Paper / arXiv / Code links: re-enable here once they exist. -->
+    <div class="links">
+      <a class="btn" href="#data"><span class="ico">&#128190;</span> Benchmark Data</a>
+      <a class="btn alt" href="#cite"><span class="ico">&#10078;</span> BibTeX</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ TEASER ============================ -->
+<section>
+  <div class="wrap">
+    <figure class="framed">
+      <img src="assets/figures/framework_intro.png" alt="From spatial input to navigation: where LLMs differ from human spatial cognition." loading="lazy" />
+      <figcaption><b>From spatial input to navigation.</b> The benchmark diagnoses LLM navigation by decomposing it into the same representational levels that structure human spatial cognition — <b style="color:var(--blue)">Fine</b> (local passability), <b style="color:var(--blue)">Meso</b> (junction topology), and <b style="color:var(--blue)">Macro</b> (global goal direction) — and probes each in isolation.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================ ABSTRACT ============================ -->
+<section class="alt">
+  <div class="wrap">
+    <h2 class="sec"><span class="kicker">Overview</span>Abstract</h2>
+    <p>Large language models (LLMs) are increasingly deployed as planners and assistants in tasks with inherent spatial structure, such as navigation and route planning, yet they remain brittle in sequential spatial reasoning. We ask not merely <em>whether</em> LLMs fail at navigation but <em>where</em> in the spatial-cognition pipeline they get lost.</p>
+    <p>We introduce a multi-scale diagnostic benchmark that decomposes maze navigation into three cognitive levels drawn from human spatial cognition: <b>Fine</b> (local passability), <b>Meso</b> (junction topology), and <b>Macro</b> (global goal direction). We evaluate three instruction-tuned chat LLMs (GPT-4o, DeepSeek-V3, Llama-3.3-70B) on 1,050 topology-annotated mazes spanning seven sizes (3×3 to 30×30) and three difficulty tiers.</p>
+    <p>The central finding: end-to-end one-shot navigation collapses to near zero by 10×10 for every model, yet the same models answer isolated single-level probes at 30–75% far beyond that size. A multi-hot first-error analysis localizes failures to Meso junction choices (59%) and Fine perception (39%), with global direction almost never at fault (1%). <b>The barrier is the cross-scale <em>aggregation</em> of individually available competences over a long sequential plan — not any single perceptual deficit.</b></p>
+
+    <div class="stats" style="margin-top:30px">
+      <div class="stat"><div class="num">1,050</div><div class="lab">topology-annotated mazes</div></div>
+      <div class="stat"><div class="num">7</div><div class="lab">sizes (3×3 → 30×30)</div></div>
+      <div class="stat"><div class="num">3</div><div class="lab">LLMs &times; 3 difficulty tiers</div></div>
+      <div class="stat"><div class="num">49,372</div><div class="lab">scored probe questions</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TL;DR ============================ -->
+<section>
+  <div class="wrap">
+    <h2 class="sec"><span class="kicker">Key Findings</span>Three modules, three questions</h2>
+    <p class="lead">The benchmark mirrors the navigation pipeline: how space is <em>read in</em>, how it is <em>represented</em> across scales, and how control should be <em>divided</em> between an LLM and an algorithm.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="rq">RQ1 · INPUT ACQUISITION</div>
+        <h3>Coordinates beat pictures</h3>
+        <p>Among four input formats, structured <span class="punch">coordinate text is the most navigable</span> (mean SR 0.34) — far ahead of rendered images (0.07). Local moves stay legal even as whole-path success vanishes, so the collapse is one of <em>global path assembly</em>.</p>
+      </div>
+      <div class="card">
+        <div class="rq">RQ2 · MULTI-SCALE REPRESENTATION</div>
+        <h3>Reading without integrating</h3>
+        <p>Isolated Fine / Meso / Macro probes survive far past where navigation collapses. First errors fall on <span class="punch">Meso (59%) and Fine (39%), almost never Macro (1%)</span>. The deficit is cross-scale <em>aggregation</em>, not perception.</p>
+      </div>
+      <div class="card">
+        <div class="rq">RQ3 · HIERARCHICAL ROUTE PLANNING</div>
+        <h3>Delegate, but the wall returns</h3>
+        <p>Handing per-step execution to a deterministic walker and querying the LLM only at junctions <span class="punch">lifts GPT-4o by up to 92 points</span> at mid sizes — but the same scaling wall re-emerges by 30×30.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BENCHMARK ============================ -->
+<section class="alt">
+  <div class="wrap">
+    <h2 class="sec"><span class="kicker">The Benchmark</span>Design at a glance</h2>
+    <figure class="framed">
+      <img src="assets/figures/framework_detail.png" alt="Benchmark overview: maze corpus, three modules, and a metrics and failure-signature panel." loading="lazy" />
+      <figcaption><b>Benchmark overview.</b> <b>&#9312; Input acquisition</b> — each maze is rendered as Words, Coordinates, an ASCII Map, or an Image. <b>&#9313; Multi-scale representation</b> — one-shot navigation is decomposed into Fine / Meso / Macro, each probed in isolation. <b>&#9314; Hierarchical route planning</b> — One-shot, Topology-blind Junction, and Topology-aided Junction delegation regimes. Trials are scored by success and a failure-signature vocabulary.</figcaption>
+    </figure>
+
+    <div style="margin-top:30px">
+      <p class="lead" style="margin-bottom:14px">Mazes are 2-D grids generated by a mix of depth-first-search (long corridors) and randomized Prim (many branches), with fixed seeds for reproducibility. By construction they are <b>trees</b>: any two cells are connected by a unique path, so every junction choice is unambiguously right or wrong. Every maze ships with per-cell passable directions, cell types, the shortest path, and the goal-reaching branch at each junction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MAZE GALLERY ============================ -->
+<section>
+  <div class="wrap">
+    <h2 class="sec"><span class="kicker">The Corpus</span>Seven sizes, one example each</h2>
+    <p class="lead">Effective (open-cell) widths of 3, 5, 7, 10, 15, 20, and 30. Each thumbnail shows a representative medium-difficulty maze with its start (S), goal (G), and unique solution path.</p>
+    <div class="mazes">
+      <div class="mz"><img src="assets/mazes/maze_s3.png"  alt="3×3 maze"  loading="lazy"/><div class="cap">3×3</div></div>
+      <div class="mz"><img src="assets/mazes/maze_s5.png"  alt="5×5 maze"  loading="lazy"/><div class="cap">5×5</div></div>
+      <div class="mz"><img src="assets/mazes/maze_s7.png"  alt="7×7 maze"  loading="lazy"/><div class="cap">7×7</div></div>
+      <div class="mz"><img src="assets/mazes/maze_s10.png" alt="10×10 maze" loading="lazy"/><div class="cap">10×10</div></div>
+      <div class="mz"><img src="assets/mazes/maze_s15.png" alt="15×15 maze" loading="lazy"/><div class="cap">15×15</div></div>
+      <div class="mz"><img src="assets/mazes/maze_s20.png" alt="20×20 maze" loading="lazy"/><div class="cap">20×20</div></div>
+      <div class="mz"><img src="assets/mazes/maze_s30.png" alt="30×30 maze" loading="lazy"/><div class="cap">30×30</div></div>
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--blue)"></span>Start</span>
+      <span><span class="dot" style="background:var(--red)"></span>Goal</span>
+      <span><span class="dash"></span>Unique solution path</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ NAVIGATION IN MOTION ============================ -->
+<section class="alt">
+  <div class="wrap">
+    <h2 class="sec"><span class="kicker">In Motion</span>A robot walks the maze</h2>
+    <p class="lead">The base map is a <b>decision-point density heatmap</b>: path cells darken (white → deep red) where junctions and dead-ends cluster — the spots where a navigator must choose. The grey dashed line is the unique correct solution; the robot's blue trail is the route it actually takes.</p>
+
+    <div class="feature">
+      <figure>
+        <img class="gif" src="assets/gifs/nav_success.gif" alt="A robot successfully navigating the maze to the goal." loading="lazy" />
+      </figure>
+      <div>
+        <h3 style="font-size:20px; margin:0 0 8px">Solving it</h3>
+        <p style="color:var(--muted); margin:0 0 14px">When the robot keeps Fine, Meso, and Macro reasoning aligned step after step, it follows the unique path from <b style="color:var(--blue)">S</b> to <b style="color:var(--red)">G</b>. On small mazes the models manage this; the benchmark's question is what breaks as the maze grows.</p>
+        <p style="color:var(--muted); margin:0">The three clips below replay the dominant ways navigation falls apart — the same failure signatures our first-error analysis counts: <b>Meso junction choices (59%)</b> and <b>Fine perception (39%)</b>.</p>
+      </div>
+    </div>
+
+    <div class="gifgrid">
+      <div class="gifcard">
+        <img class="gif" src="assets/gifs/nav_err_wrong_turn.gif" alt="Robot takes the wrong branch at a junction and ends in a dead-end." loading="lazy" />
+        <h4>Wrong junction <span class="lvl meso">MESO</span></h4>
+        <p>At a branch point the robot picks a decoy branch (green arrow marks the goal-reaching one) and dies in a dead-end. The single most common first error.</p>
+      </div>
+      <div class="gifcard">
+        <img class="gif" src="assets/gifs/nav_err_wall_hit.gif" alt="Robot lunges into a wall." loading="lazy" />
+        <h4>Wall hit <span class="lvl fine">FINE</span></h4>
+        <p>The robot emits a move into a wall cell — a local-passability error. It misreads which neighbours are open.</p>
+      </div>
+      <div class="gifcard">
+        <img class="gif" src="assets/gifs/nav_err_teleport.gif" alt="Robot teleports to a non-adjacent cell." loading="lazy" />
+        <h4>Teleport <span class="lvl fine">FINE</span></h4>
+        <p>The robot jumps to a non-adjacent cell, losing track of its own position — the most frequent Fine error at larger sizes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ RESULTS ============================ -->
+<section>
+  <div class="wrap">
+    <h2 class="sec"><span class="kicker">Results</span>Where LLMs get lost</h2>
+
+    <div class="figrow">
+      <figure class="framed">
+        <img src="assets/figures/exp1_format_robust.png" alt="Structured textual input outperforms visual and grid input across every model and size." loading="lazy" />
+        <figcaption><b>RQ1.</b> Structured coordinate text outperforms visual and grid input across every model. Valid-move ratio stays high even where success rate is near zero — the failure is global path assembly, not local legality.</figcaption>
+      </figure>
+
+      <figure class="framed">
+        <img src="assets/figures/exp2_one-hot_isolated_main.png" alt="Scaling failure is driven by aggregation, not local perception." loading="lazy" />
+        <figcaption><b>RQ2.</b> One-shot navigation collapses to ≈0 by 10×10 for all three models, while isolated Fine / Meso / Macro probes persist at 30–75%. The coupled Meso×Macro probe decays faster than its Meso component.</figcaption>
+      </figure>
+
+      <div class="two">
+        <figure class="framed">
+          <img src="assets/figures/exp2_One-shot_Nav_First_Error_Analysis.png" alt="First-step errors dominated by Meso topological choices and Fine perception." loading="lazy" />
+          <figcaption><b>First-error analysis.</b> Over 1,484 failed trials, the centroid sits at Fine ≈39%, Meso ≈59%, Macro ≈1%.</figcaption>
+        </figure>
+        <figure class="framed">
+          <img src="assets/figures/exp2_coupling_ladder.png" alt="Coupling ladder: cost of moving from any single probe to full sequential navigation." loading="lazy" />
+          <figcaption><b>Coupling ladder.</b> The jump that breaks navigation is not between levels but from any single question to multi-step sequential execution.</figcaption>
+        </figure>
+      </div>
+
+      <figure class="framed">
+        <img src="assets/figures/exp3_junction_blind_aided_delegation.png" alt="Junction-level delegation lifts navigation but does not remove the scaling barrier." loading="lazy" />
+        <figcaption><b>RQ3.</b> Junction-level delegation with an explicit topological prompt lifts GPT-4o from 2/0/0% to 94/80/70% at sizes 7/10/15 — but recovery is bounded: even aided navigation falls to near zero by 30×30. Delegation buys roughly a doubling of the navigable size; it does not remove the scaling wall.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ DATA & DOWNLOAD ============================ -->
+<section id="data" class="alt">
+  <div class="wrap">
+    <h2 class="sec"><span class="kicker">Download</span>Benchmark data</h2>
+    <p class="lead">All 1,050 mazes are released as JSON, one file per effective size (150 mazes each: 50 per difficulty tier). Every maze is fully topology-annotated — usable as a drop-in spatial-reasoning benchmark for any model.</p>
+
+    <table class="dl">
+      <thead>
+        <tr><th>File</th><th>Effective size</th><th class="num">Mazes</th><th class="num">Size</th><th>Download</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>mazes_s3.json</code></td><td>3×3</td><td class="num">150</td><td class="num">0.7 MB</td><td><a href="https://github.com/YuhanJiang415/lost-in-aggregation/releases/download/v0.1/mazes_s3.json">download</a></td></tr>
+        <tr><td><code>mazes_s5.json</code></td><td>5×5</td><td class="num">150</td><td class="num">1.7 MB</td><td><a href="https://github.com/YuhanJiang415/lost-in-aggregation/releases/download/v0.1/mazes_s5.json">download</a></td></tr>
+        <tr><td><code>mazes_s7.json</code></td><td>7×7</td><td class="num">150</td><td class="num">3.2 MB</td><td><a href="https://github.com/YuhanJiang415/lost-in-aggregation/releases/download/v0.1/mazes_s7.json">download</a></td></tr>
+        <tr><td><code>mazes_s10.json</code></td><td>10×10</td><td class="num">150</td><td class="num">6.3 MB</td><td><a href="https://github.com/YuhanJiang415/lost-in-aggregation/releases/download/v0.1/mazes_s10.json">download</a></td></tr>
+        <tr><td><code>mazes_s15.json</code></td><td>15×15</td><td class="num">150</td><td class="num">13.5 MB</td><td><a href="https://github.com/YuhanJiang415/lost-in-aggregation/releases/download/v0.1/mazes_s15.json">download</a></td></tr>
+        <tr><td><code>mazes_s20.json</code></td><td>20×20</td><td class="num">150</td><td class="num">23.4 MB</td><td><a href="https://github.com/YuhanJiang415/lost-in-aggregation/releases/download/v0.1/mazes_s20.json">download</a></td></tr>
+        <tr><td><code>mazes_s30.json</code></td><td>30×30</td><td class="num">150</td><td class="num">51.2 MB</td><td><a href="https://github.com/YuhanJiang415/lost-in-aggregation/releases/download/v0.1/mazes_s30.json">download</a></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      All files are published as assets on the repository's <b>GitHub Releases</b> (tag <code>v0.1</code>). The full corpus is ~100 MB; each file is one effective size (150 mazes: 50 per difficulty tier).
+    </div>
+
+    <h3 style="margin:34px 0 12px; font-size:18px">Per-maze schema</h3>
+    <div class="schema"><span class="c">// one entry of mazes_s{N}.json</span>
+{
+  <span class="k">"id"</span>: <span class="s">"maze_s7_medium_000"</span>,
+  <span class="k">"effective_size"</span>: 7,           <span class="c">// open-cell width</span>
+  <span class="k">"grid_size"</span>: 15,               <span class="c">// incl. outer wall</span>
+  <span class="k">"algorithm"</span>: <span class="s">"dfs"</span>,            <span class="c">// "dfs" | "prim"</span>
+  <span class="k">"seed"</span>: 30042,
+  <span class="k">"grid"</span>: [[1,1,1,...],[1,0,0,...], ...],  <span class="c">// 0 = path, 1 = wall</span>
+  <span class="k">"start"</span>: [5, 1],  <span class="k">"goal"</span>: [1, 5],
+  <span class="k">"difficulty"</span>: <span class="s">"medium"</span>,     <span class="c">// "easy" | "medium" | "hard"</span>
+  <span class="k">"metrics"</span>: {
+    <span class="k">"junction_count_on_path"</span>: ..., <span class="k">"dead_end_density"</span>: ...,
+    <span class="k">"confusion_ratio"</span>: ...,        <span class="k">"shortest_path_length"</span>: ...
+  },
+  <span class="k">"topology"</span>: {
+    <span class="k">"cell_types"</span>:     { <span class="s">"r,c"</span>: <span class="s">"corridor|corner|junction|dead-end"</span> },
+    <span class="k">"passability"</span>:    { <span class="s">"r,c"</span>: {up,down,left,right: bool} },
+    <span class="k">"shortest_path"</span>:  [[r,c], ...],
+    <span class="k">"junction_choices"</span>: { ... },  <span class="c">// goal-reaching branch per junction</span>
+    <span class="k">"dead_ends"</span>:      [[r,c], ...]
+  }
+}</div>
+  </div>
+</section>
+
+<!-- ============================ CODE ============================ -->
+<section>
+  <div class="wrap">
+    <h2 class="sec"><span class="kicker">Reproduce</span>Code &amp; harness</h2>
+    <p class="lead">We will release the maze generator, the four input encoders, the isolated-probe generators with answer keys, the junction-delegation harness, and all evaluation and plotting code. The benchmark data is available now.</p>
+    <div class="links" style="justify-content:flex-start">
+      <a class="btn" href="#data"><span class="ico">&#128190;</span> Download the data</a>
+      <span class="btn alt" style="cursor:default;opacity:.7"><span class="ico">&#128187;</span> Code &mdash; coming soon</span>
+    </div>
+    <div class="callout">
+      The benchmark is built to be extended: the topology annotation already supports cyclic mazes (where junction accuracy and shortest-path-branch accuracy diverge), and the delegation harness accepts new per-level oracle conditions.
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CITATION ============================ -->
+<section id="cite" class="alt">
+  <div class="wrap">
+    <h2 class="sec"><span class="kicker">Cite</span>BibTeX</h2>
+    <div class="copybar">
+      <span class="lead" style="margin:0">If you use the benchmark, please cite:</span>
+      <button class="copybtn" onclick="copyBib()">Copy</button>
+    </div>
+<pre class="bib" id="bibtex">@inproceedings{jiang2026lostinaggregation,
+  title     = {Lost in Aggregation: A Multi-Scale Diagnostic Benchmark
+               for LLM Spatial Navigation},
+  author    = {Jiang, Yuhan and Luo, Peng and Meng, Liqiu},
+  booktitle = {Proceedings of the 34th ACM SIGSPATIAL International
+               Conference on Advances in Geographic Information Systems
+               (SIGSPATIAL '26)},
+  year      = {2026},
+  publisher = {ACM},
+  address   = {Riverside, CA, USA},
+  doi       = {10.1145/XXXXXXX.XXXXXXX}
+}</pre>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Lost in Aggregation — A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation · ACM SIGSPATIAL 2026 (Benchmark Track)<br/>
+    Yuhan Jiang · Peng Luo · Liqiu Meng &nbsp;|&nbsp; Page built for benchmark release.</p>
+  </div>
+</footer>
+
+<script>
+  function copyBib() {
+    const t = document.getElementById('bibtex').innerText;
+    navigator.clipboard.writeText(t).then(function () {
+      const b = document.querySelector('.copybtn');
+      const old = b.textContent;
+      b.textContent = 'Copied!';
+      setTimeout(function () { b.textContent = old; }, 1500);
+    });
+  }
+</script>
+</body>
+</html>

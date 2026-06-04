@@ -1,7 +1,7 @@
 # Lost in Aggregation
 
 **A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation**
-Yuhan Jiang · Peng Luo · Liqiu Meng — ACM SIGSPATIAL 2026 (Benchmark Track)
+Yuhan Jiang · Peng Luo · Liqiu Meng — Preprint, under review
 
 > 🌐 **Project page:** https://yuhanjiang415.github.io/lost-in-aggregation/
 
@@ -44,15 +44,13 @@ published; they will be released here. The benchmark data is available now via
 ## Citation
 
 ```bibtex
-@inproceedings{jiang2026lostinaggregation,
-  title     = {Lost in Aggregation: A Multi-Scale Diagnostic Benchmark
-               for LLM Spatial Navigation},
-  author    = {Jiang, Yuhan and Luo, Peng and Meng, Liqiu},
-  booktitle = {Proceedings of the 34th ACM SIGSPATIAL International
-               Conference on Advances in Geographic Information Systems
-               (SIGSPATIAL '26)},
-  year      = {2026},
-  publisher = {ACM}
+@misc{jiang2026lostinaggregation,
+  title        = {Lost in Aggregation: A Multi-Scale Diagnostic Benchmark
+                  for LLM Spatial Navigation},
+  author       = {Jiang, Yuhan and Luo, Peng and Meng, Liqiu},
+  year         = {2026},
+  note         = {Preprint, under review},
+  howpublished = {\url{https://yuhanjiang415.github.io/lost-in-aggregation/}}
 }
 ```
 

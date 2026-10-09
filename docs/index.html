@@ -329,7 +329,7 @@
   <div class="wrap">
     <h2 class="sec"><span class="kicker">Overview</span>Abstract</h2>
     <p>Large language models (LLMs) are increasingly deployed as planners and assistants in tasks with inherent spatial structure, such as navigation and route planning, yet they remain brittle in sequential spatial reasoning. We ask not merely <em>whether</em> LLMs fail at navigation but <em>where</em> in the spatial-cognition pipeline they get lost.</p>
-    <p>We introduce a multi-scale diagnostic benchmark that decomposes maze navigation into three cognitive levels drawn from human spatial cognition: <b>Fine</b> (local passability), <b>Meso</b> (junction topology), and <b>Macro</b> (global goal direction). We evaluate three instruction-tuned chat LLMs (GPT-4o, DeepSeek-V3, Llama-3.3-70B) on 1,050 topology-annotated mazes spanning seven sizes (3×3 to 30×30) and three difficulty tiers.</p>
+    <p>We introduce a multi-scale diagnostic benchmark that decomposes maze navigation into three cognitive levels drawn from human spatial cognition: <b>Fine</b> (local passability), <b>Meso</b> (junction topology), and <b>Macro</b> (global goal direction). We evaluate three instruction-tuned chat LLMs (GPT-4o, DeepSeek-V3.1, Llama-3.3-70B) on 1,050 topology-annotated mazes spanning seven sizes (3×3 to 30×30) and three difficulty tiers.</p>
     <p>The central finding: end-to-end one-shot navigation collapses to near zero by 10×10 for every model, yet the same models answer isolated single-level probes at 30–75% far beyond that size. A multi-hot first-error analysis localizes failures to Meso junction choices (59%) and Fine perception (39%), with global direction almost never at fault (1%). <b>The barrier is the cross-scale <em>aggregation</em> of individually available competences over a long sequential plan — not any single perceptual deficit.</b></p>
 
     <div class="stats" style="margin-top:30px">
@@ -350,7 +350,7 @@
       <div class="card">
         <div class="rq">RQ1 · INPUT ACQUISITION</div>
         <h3>Coordinates beat pictures</h3>
-        <p>Among four input formats, structured <span class="punch">coordinate text is the most navigable</span> (mean SR 0.34) — far ahead of rendered images (0.07). Local moves stay legal even as whole-path success vanishes, so the collapse is one of <em>global path assembly</em>.</p>
+        <p>Among the text formats, structured <span class="punch">coordinate text is the strongest in aggregate</span> (mean SR 34%, vs. Words 27% and Map 15%); from a rendered image, GPT-4o solved no maze (0/150). Local moves stay legal even as whole-path success vanishes, so the collapse is one of <em>global path assembly</em>.</p>
       </div>
       <div class="card">
         <div class="rq">RQ2 · MULTI-SCALE REPRESENTATION</div>
@@ -447,8 +447,8 @@
 
     <div class="figrow">
       <figure class="framed">
-        <img src="assets/figures/exp1_format_robust.png" alt="Structured textual input outperforms visual and grid input across every model and size." loading="lazy" />
-        <figcaption><b>RQ1.</b> Structured coordinate text outperforms visual and grid input across every model. Valid-move ratio stays high even where success rate is near zero — the failure is global path assembly, not local legality.</figcaption>
+        <img src="assets/figures/exp1_format_robust.png" alt="Success rate and valid-move ratio for four input formats across three models and three maze sizes." loading="lazy" />
+        <figcaption><b>RQ1.</b> Pooled over models, structured coordinate input yields the highest success among text formats at every maze size. Picture input is shown for GPT-4o only; DeepSeek-V3.1 and Llama-3.3-70B accept text only. Valid-move ratio stays high even where success rate is near zero — the failure is global path assembly, not local legality.</figcaption>
       </figure>
 
       <figure class="framed">
@@ -456,16 +456,15 @@
         <figcaption><b>RQ2.</b> One-shot navigation collapses to ≈0 by 10×10 for all three models, while isolated Fine / Meso / Macro probes persist at 30–75%. The coupled Meso×Macro probe decays faster than its Meso component.</figcaption>
       </figure>
 
-      <div class="two">
-        <figure class="framed">
-          <img src="assets/figures/exp2_One-shot_Nav_First_Error_Analysis.png" alt="First-step errors dominated by Meso topological choices and Fine perception." loading="lazy" />
-          <figcaption><b>First-error analysis.</b> Over 1,484 failed trials, the centroid sits at Fine ≈39%, Meso ≈59%, Macro ≈1%.</figcaption>
-        </figure>
-        <figure class="framed">
-          <img src="assets/figures/exp2_coupling_ladder.png" alt="Coupling ladder: cost of moving from any single probe to full sequential navigation." loading="lazy" />
-          <figcaption><b>Coupling ladder.</b> The jump that breaks navigation is not between levels but from any single question to multi-step sequential execution.</figcaption>
-        </figure>
-      </div>
+      <figure class="framed">
+        <img src="assets/figures/exp2_One-shot_Nav_First_Error_Analysis.png" alt="First-step errors dominated by Meso topological choices and Fine perception." loading="lazy" />
+        <figcaption><b>First-error analysis.</b> Over 1,484 failed trials, the centroid sits at Fine ≈39%, Meso ≈59%, Macro ≈1%.</figcaption>
+      </figure>
+
+      <figure class="framed">
+        <img src="assets/figures/exp2_coupling_ladder.png" alt="Coupling ladder: accuracy retention and above-chance score for five rungs of cognitive coupling across maze sizes." loading="lazy" />
+        <figcaption><b>Coupling ladder.</b> <b>a</b> — Accuracy retained relative to 3×3; <b>b</b> — above-chance score. The jump that breaks navigation is not between levels but from any single question to multi-step sequential execution.</figcaption>
+      </figure>
 
       <figure class="framed">
         <img src="assets/figures/exp3_junction_blind_aided_delegation.png" alt="Junction-level delegation lifts navigation but does not remove the scaling barrier." loading="lazy" />

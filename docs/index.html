@@ -299,10 +299,10 @@
 
     <div class="authors">
       <a href="mailto:yuhan.jiang@tum.de">Yuhan Jiang</a><sup>1</sup>,
-      <a href="mailto:pengluo@mit.edu">Peng Luo</a><sup>2,&#9993;</sup>,
+      <a href="mailto:peng-luo@uiowa.edu">Peng Luo</a><sup>2,3,&#9993;</sup>,
       <a href="mailto:liqiu.meng@tum.de">Liqiu Meng</a><sup>1</sup>
     </div>
-    <div class="affil"><sup>1</sup>Technical University of Munich &nbsp;·&nbsp; <sup>2</sup>Massachusetts Institute of Technology</div>
+    <div class="affil"><sup>1</sup>Chair of Cartography and Visual Analytics, Technical University of Munich<br/><sup>2</sup>School of Earth, Environment, and Sustainability, University of Iowa<br/><sup>3</sup>Senseable City Lab, Massachusetts Institute of Technology</div>
     <div class="note">&#9993; Corresponding author</div>
 
     <!-- Paper / arXiv / Code links: re-enable here once they exist. -->
@@ -345,22 +345,22 @@
 <section>
   <div class="wrap">
     <h2 class="sec"><span class="kicker">Key Findings</span>Three modules, three questions</h2>
-    <p class="lead">The benchmark mirrors the navigation pipeline: how space is <em>read in</em>, how it is <em>represented</em> across scales, and how control should be <em>divided</em> between an LLM and an algorithm.</p>
+    <p class="lead">The benchmark mirrors the route-planning pipeline: how space is <em>read in</em>, how it is <em>represented</em> across scales, and how control should be <em>divided</em> between an LLM and an algorithm.</p>
     <div class="cards">
       <div class="card">
         <div class="rq">RQ1 · INPUT ACQUISITION</div>
-        <h3>Coordinates beat pictures</h3>
+        <h3>Coordinates are the best text encoding</h3>
         <p>Among the text formats, structured <span class="punch">coordinate text is the strongest in aggregate</span> (mean SR 34%, vs. Words 27% and Map 15%); from a rendered image, GPT-4o solved no maze (0/150). Local moves stay legal even as whole-path success vanishes, so the collapse is one of <em>global path assembly</em>.</p>
       </div>
       <div class="card">
         <div class="rq">RQ2 · MULTI-SCALE REPRESENTATION</div>
         <h3>Lost in aggregation</h3>
-        <p>Isolated Fine / Meso / Macro probes survive far past where navigation collapses. First errors fall on <span class="punch">Meso (59%) and Fine (39%), almost never Macro (1%)</span>. The deficit is cross-scale <em>aggregation</em>, not perception.</p>
+        <p>At 10×10, complete-route success is 0–6% while isolated Fine / Meso / Macro probes stay at roughly 30–75%. First errors fall on <span class="punch">Meso (59%) and Fine (39%), almost never Macro (1%)</span>. Success on individual judgments does not ensure a successful <em>sequence</em>.</p>
       </div>
       <div class="card">
         <div class="rq">RQ3 · HIERARCHICAL ROUTE PLANNING</div>
-        <h3>Delegate, but the wall returns</h3>
-        <p>Handing per-step execution to a deterministic walker and querying the LLM only at junctions <span class="punch">lifts GPT-4o by up to 92 points</span> at mid sizes — but the same scaling wall re-emerges by 30×30.</p>
+        <h3>Delegation helps, up to a size</h3>
+        <p>Handing per-step execution to a deterministic walker and querying the LLM only at junctions <span class="punch">lifts GPT-4o by 70–92 points</span> at 7×7 to 15×15 — but success declines by 20×20 and is near zero by 30×30.</p>
       </div>
     </div>
   </div>
@@ -403,7 +403,7 @@
   </div>
 </section>
 
-<!-- ============================ NAVIGATION IN MOTION ============================ -->
+<!-- ============================ ROUTE PLANNING IN MOTION ============================ -->
 <section class="alt">
   <div class="wrap">
     <h2 class="sec"><span class="kicker">In Motion</span>A robot walks the maze</h2>
@@ -416,7 +416,7 @@
       <div>
         <h3 style="font-size:20px; margin:0 0 8px">Solving it</h3>
         <p style="color:var(--muted); margin:0 0 14px">When the robot keeps Fine, Meso, and Macro reasoning aligned step after step, it follows the unique path from <b style="color:var(--blue)">S</b> to <b style="color:var(--red)">G</b>. On small mazes the models manage this; the benchmark's question is what breaks as the maze grows.</p>
-        <p style="color:var(--muted); margin:0">The three clips below replay the dominant ways navigation falls apart — the same failure signatures our first-error analysis counts: <b>Meso junction choices (59%)</b> and <b>Fine perception (39%)</b>.</p>
+        <p style="color:var(--muted); margin:0">The three clips below replay the dominant ways route planning falls apart — the same failure signatures our first-error analysis counts: <b>Meso junction choices (59%)</b> and <b>Fine local execution (39%)</b>.</p>
       </div>
     </div>
 
@@ -452,23 +452,23 @@
       </figure>
 
       <figure class="framed">
-        <img src="assets/figures/exp2_one-hot_isolated_main.png" alt="Scaling failure is driven by aggregation, not local perception." loading="lazy" />
-        <figcaption><b>RQ2.</b> One-shot navigation collapses to ≈0 by 10×10 for all three models, while isolated Fine / Meso / Macro probes persist at 30–75%. The coupled Meso×Macro probe decays faster than its Meso component.</figcaption>
+        <img src="assets/figures/exp2_one-hot_isolated_main.png" alt="End-to-end route planning declines more steeply with maze size than isolated probe accuracy." loading="lazy" />
+        <figcaption><b>RQ2.</b> End-to-end route planning declines more steeply with maze size than isolated probe accuracy. At 10×10, one-shot success is 0–6% across models while isolated probes stay at roughly 30–75%. The coupled Meso×Macro probe declines from 67% at 3×3 to about 40% at 20×20–30×30.</figcaption>
       </figure>
 
       <figure class="framed">
-        <img src="assets/figures/exp2_One-shot_Nav_First_Error_Analysis.png" alt="First-step errors dominated by Meso topological choices and Fine perception." loading="lazy" />
-        <figcaption><b>First-error analysis.</b> Over 1,484 failed trials, the centroid sits at Fine ≈39%, Meso ≈59%, Macro ≈1%.</figcaption>
+        <img src="assets/figures/exp2_One-shot_Nav_First_Error_Analysis.png" alt="First-error composition of failed one-shot route planning across the Fine, Meso and Macro spatial scales." loading="lazy" />
+        <figcaption><b>First-error analysis.</b> Over 1,484 failed trials, the compositional centroid sits at Fine ≈39%, Meso ≈59%, Macro ≈1%: first errors are dominated by Meso topological choices and Fine local execution, and global direction is almost never the first thing to fail.</figcaption>
       </figure>
 
       <figure class="framed">
         <img src="assets/figures/exp2_coupling_ladder.png" alt="Coupling ladder: accuracy retention and above-chance score for five rungs of cognitive coupling across maze sizes." loading="lazy" />
-        <figcaption><b>Coupling ladder.</b> <b>a</b> — Accuracy retained relative to 3×3; <b>b</b> — above-chance score. The jump that breaks navigation is not between levels but from any single question to multi-step sequential execution.</figcaption>
+        <figcaption><b>Coupling ladder.</b> <b>a</b> — The gap persists after normalizing each task to its 3×3 performance. <b>b</b> — Accuracy above complete-route success is not the same as accuracy above chance: at large sizes Meso approaches its 50% guessing baseline, and at 30×30 Macro retains an above-chance score of about 22% and coupled Meso×Macro about 11%.</figcaption>
       </figure>
 
       <figure class="framed">
-        <img src="assets/figures/exp3_junction_blind_aided_delegation.png" alt="Junction-level delegation lifts navigation but does not remove the scaling barrier." loading="lazy" />
-        <figcaption><b>RQ3.</b> Junction-level delegation with an explicit topological prompt lifts GPT-4o from 2/0/0% to 94/80/70% at sizes 7/10/15 — but recovery is bounded: even aided navigation falls to near zero by 30×30. Delegation buys roughly a doubling of the navigable size; it does not remove the scaling wall.</figcaption>
+        <img src="assets/figures/exp3_junction_blind_aided_delegation.png" alt="Route-planning success under three delegation regimes, and the junction-delegation gain by model and maze size." loading="lazy" />
+        <figcaption><b>RQ3.</b> Junction-level delegation with an explicit topological prompt lifts GPT-4o from a one-shot 2/0/0% to 94/80/70% at sizes 7/10/15, and DeepSeek-V3.1 from 28/6/0% to 80/56/30%. Recovery remains limited by maze size: success declines by 20×20 and falls to near zero by 30×30 (both exploratory, n &lt; 50). Delegation roughly doubles the navigable size, but performance still declines at larger sizes.</figcaption>
       </figure>
     </div>
   </div>

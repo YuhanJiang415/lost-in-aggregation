@@ -1,18 +1,19 @@
 # Lost in Aggregation
 
-**A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation**
+**A Multi-Scale Diagnostic Benchmark for LLM Route Planning**
 Yuhan Jiang · Peng Luo · Liqiu Meng — Preprint, under review
 
 > 🌐 **Project page:** https://yuhanjiang415.github.io/lost-in-aggregation/
 
-We ask not merely *whether* LLMs fail at maze navigation but *where* in the
-spatial-cognition pipeline they get lost. The benchmark decomposes navigation
-into three cognitive levels — **Fine** (local passability), **Meso** (junction
-topology), and **Macro** (global goal direction) — and probes each in
-isolation across a systematic size sweep. The central finding: end-to-end
-navigation collapses long before any single competence does, so the binding
-constraint is the cross-scale *aggregation* of individually available skills
-over a long sequential plan.
+LLMs struggle with sequential spatial planning, but aggregate success rates say
+little about where failures occur. The benchmark separates local passability
+(**Fine**), junction topology (**Meso**), and goal orientation (**Macro**),
+probes each in isolation, and compares that with one-shot planning, where the
+model must aggregate many such judgments into a complete route. At 10×10,
+complete-route success falls to 0–6% while isolated-probe accuracy stays at
+roughly 30–75%; first errors occur mainly at the Meso (59%) and Fine (39%)
+scales. On 90 OpenStreetMap routes in three cities, GPT-4o's isolated
+junction-choice accuracy reaches 64.7%, against 13.3% complete-route success.
 
 ## Benchmark data
 
@@ -62,7 +63,7 @@ the street-network routes in [`road_network/`](road_network/).
 ```bibtex
 @misc{jiang2026lostinaggregation,
   title        = {Lost in Aggregation: A Multi-Scale Diagnostic Benchmark
-                  for LLM Spatial Navigation},
+                  for LLM Route Planning},
   author       = {Jiang, Yuhan and Luo, Peng and Meng, Liqiu},
   year         = {2026},
   note         = {Preprint, under review},

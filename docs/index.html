@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lost in Aggregation — A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation</title>
-<meta name="description" content="A cognitively grounded, multi-scale diagnostic benchmark for LLM spatial navigation: 1,050 topology-annotated mazes across seven sizes and three difficulty tiers, plus 90 real street-network routes in Munich, Tokyo, and Toronto." />
+<title>Lost in Aggregation — A Multi-Scale Diagnostic Benchmark for LLM Route Planning</title>
+<meta name="description" content="A multi-scale diagnostic benchmark for LLM route planning: 1,050 topology-annotated mazes across seven sizes and three difficulty tiers, plus 90 real street-network routes in Munich, Tokyo, and Toronto." />
 
 <!-- Social preview (Open Graph + Twitter). Absolute URLs required by crawlers. -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Lost in Aggregation" />
 <meta property="og:url" content="https://yuhanjiang415.github.io/lost-in-aggregation/" />
-<meta property="og:title" content="Lost in Aggregation: A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation" />
-<meta property="og:description" content="Where do LLMs get lost in spatial navigation? A diagnostic benchmark of 1,050 topology-annotated mazes that localizes the failure to cross-scale aggregation." />
+<meta property="og:title" content="Lost in Aggregation: A Multi-Scale Diagnostic Benchmark for LLM Route Planning" />
+<meta property="og:description" content="Where do LLMs get lost in route planning? 1,050 topology-annotated mazes and 90 OpenStreetMap routes that separate isolated spatial judgments from complete-route success." />
 <meta property="og:image" content="https://yuhanjiang415.github.io/lost-in-aggregation/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="Lost in Aggregation — a robot navigating a maze on a decision-point density heatmap." />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Lost in Aggregation: A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation" />
-<meta name="twitter:description" content="Where do LLMs get lost in spatial navigation? 1,050 topology-annotated mazes that localize the failure to cross-scale aggregation." />
+<meta name="twitter:title" content="Lost in Aggregation: A Multi-Scale Diagnostic Benchmark for LLM Route Planning" />
+<meta name="twitter:description" content="Where do LLMs get lost in route planning? 1,050 mazes and 90 OpenStreetMap routes that separate isolated spatial judgments from complete-route success." />
 <meta name="twitter:image" content="https://yuhanjiang415.github.io/lost-in-aggregation/assets/og-image.png" />
 
 <style>
@@ -294,7 +294,7 @@
     <span class="venue">Preprint · Under review</span>
     <h1 class="title">
       Lost in Aggregation
-      <span class="sub">A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation</span>
+      <span class="sub">A Multi-Scale Diagnostic Benchmark for LLM Route Planning</span>
     </h1>
 
     <div class="authors">
@@ -318,8 +318,8 @@
 <section>
   <div class="wrap">
     <figure class="framed">
-      <img src="assets/figures/framework_intro.png" alt="From spatial input to navigation: where LLMs differ from human spatial cognition." loading="lazy" />
-      <figcaption><b>From spatial input to navigation.</b> The benchmark diagnoses LLM navigation by decomposing it into the same representational levels that structure human spatial cognition — <b style="color:var(--blue)">Fine</b> (local passability), <b style="color:var(--blue)">Meso</b> (junction topology), and <b style="color:var(--blue)">Macro</b> (global goal direction) — and probes each in isolation.</figcaption>
+      <img src="assets/figures/framework_intro.png" alt="Conceptual framework comparing human and LLM spatial cognition, from input acquisition through spatial learning to route planning." loading="lazy" />
+      <figcaption><b>From spatial input to route planning.</b> The benchmark diagnoses LLM route planning by decomposing it into the same representational levels that structure human spatial cognition — <b style="color:var(--blue)">Fine</b> (local passability), <b style="color:var(--blue)">Meso</b> (junction topology), and <b style="color:var(--blue)">Macro</b> (global goal direction) — and probes each in isolation.</figcaption>
     </figure>
   </div>
 </section>
@@ -328,9 +328,9 @@
 <section class="alt">
   <div class="wrap">
     <h2 class="sec"><span class="kicker">Overview</span>Abstract</h2>
-    <p>Large language models (LLMs) are increasingly deployed as planners and assistants in tasks with inherent spatial structure, such as navigation and route planning, yet they remain brittle in sequential spatial reasoning. We ask not merely <em>whether</em> LLMs fail at navigation but <em>where</em> in the spatial-cognition pipeline they get lost.</p>
-    <p>We introduce a multi-scale diagnostic benchmark that decomposes maze navigation into three cognitive levels drawn from human spatial cognition: <b>Fine</b> (local passability), <b>Meso</b> (junction topology), and <b>Macro</b> (global goal direction). We evaluate three instruction-tuned chat LLMs (GPT-4o, DeepSeek-V3.1, Llama-3.3-70B) on 1,050 topology-annotated mazes spanning seven sizes (3×3 to 30×30) and three difficulty tiers.</p>
-    <p>The central finding: end-to-end one-shot navigation collapses to near zero by 10×10 for every model, yet the same models answer isolated single-level probes at 30–75% far beyond that size. A multi-hot first-error analysis localizes failures to Meso junction choices (59%) and Fine perception (39%), with global direction almost never at fault (1%). <b>The barrier is the cross-scale <em>aggregation</em> of individually available competences over a long sequential plan — not any single perceptual deficit.</b></p>
+    <p>Large language models (LLMs) struggle with sequential spatial planning, but aggregate success rates provide little insight into where failures occur. We present a multi-scale benchmark that separates local passability (<b>Fine</b>), junction topology (<b>Meso</b>), and goal orientation (<b>Macro</b>). We evaluate three LLMs on 1,050 mazes spanning seven sizes and compare four input formats. Coordinate lists are the most effective text encoding overall.</p>
+    <p>Isolated probes assess individual spatial judgments, while one-shot planning requires the model to aggregate many such judgments into a complete route. At 10×10, complete-route success falls to 0 to 6%, while isolated-probe accuracy remains approximately 30 to 75%. Success on individual judgments therefore does not ensure reliable route generation. First errors occur mainly at the Meso (59%) and Fine (39%) scales, with Macro errors accounting for about 1%.</p>
+    <p>On 90 OpenStreetMap routes in three cities, GPT-4o’s isolated junction-choice accuracy reaches 64.7%, compared with 13.3% complete-route success. Most of its failed routes included a nonexistent street connection, often a final jump onto the destination. <b>These findings suggest that difficulties in coordinating Fine, Meso, and Macro judgments contribute to route-planning failures.</b></p>
 
     <div class="stats" style="margin-top:30px">
       <div class="stat"><div class="num">1,050</div><div class="lab">topology-annotated mazes</div></div>
@@ -371,8 +371,8 @@
   <div class="wrap">
     <h2 class="sec"><span class="kicker">The Benchmark</span>Design at a glance</h2>
     <figure class="framed">
-      <img src="assets/figures/framework_detail.png" alt="Benchmark overview: maze corpus, three modules, and a metrics and failure-signature panel." loading="lazy" />
-      <figcaption><b>Benchmark overview.</b> <b>&#9312; Input acquisition</b> — each maze is rendered as Words, Coordinates, an ASCII Map, or an Image. <b>&#9313; Multi-scale representation</b> — one-shot navigation is decomposed into Fine / Meso / Macro, each probed in isolation. <b>&#9314; Hierarchical route planning</b> — One-shot, Topology-blind Junction, and Topology-aided Junction delegation regimes. Trials are scored by success and a failure-signature vocabulary.</figcaption>
+      <img src="assets/figures/framework_detail.png" alt="Benchmark overview: the maze corpus, the three maze modules, the transfer to real street networks, and the metrics and failure-signature vocabulary." loading="lazy" />
+      <figcaption><b>Benchmark overview.</b> <b>&#9312; Input acquisition</b> — each maze is presented as Words, Coordinates, an ASCII Map, or an Image. <b>&#9313; Multi-scale representation</b> — one-shot route planning is decomposed into Fine / Meso / Macro, each probed in isolation. <b>&#9314; Hierarchical route planning</b> — One-shot, Topology-blind Junction, and Topology-aided Junction delegation regimes. <b>&#9315; Transfer to real street networks</b> — the analogous isolated judgments (neighbor identification, junction choice) and the complete-route task on 90 OpenStreetMap routes. Trials are scored by success and a failure-signature vocabulary.</figcaption>
     </figure>
 
     <div style="margin-top:30px">
@@ -648,7 +648,7 @@
     </div>
 <pre class="bib" id="bibtex">@misc{jiang2026lostinaggregation,
   title        = {Lost in Aggregation: A Multi-Scale Diagnostic Benchmark
-                  for LLM Spatial Navigation},
+                  for LLM Route Planning},
   author       = {Jiang, Yuhan and Luo, Peng and Meng, Liqiu},
   year         = {2026},
   note         = {Preprint, under review},
@@ -659,7 +659,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Lost in Aggregation — A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation · Preprint · Under review<br/>
+    <p>Lost in Aggregation — A Multi-Scale Diagnostic Benchmark for LLM Route Planning · Preprint · Under review<br/>
     Yuhan Jiang · Peng Luo · Liqiu Meng &nbsp;|&nbsp; Page built for benchmark release.</p>
   </div>
 </footer>

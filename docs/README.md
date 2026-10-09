@@ -1,7 +1,7 @@
 # Project homepage — *Lost in Aggregation*
 
 A self-contained static project page for the benchmark
-**Lost in Aggregation: A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation**
+**Lost in Aggregation: A Multi-Scale Diagnostic Benchmark for LLM Route Planning**
 (ACM SIGSPATIAL 2026, Benchmark Track).
 
 ```

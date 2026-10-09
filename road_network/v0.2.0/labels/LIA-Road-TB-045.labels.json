@@ -1,0 +1,387 @@
+{
+  "dataset_id": "LIA-Road-TB-045",
+  "decisions": [
+    {
+      "branch_factor": 2,
+      "current": "N0041",
+      "normalized_second_best_margin": 0.343259,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 207.988,
+          "edge_length_m": 18.813,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0037"
+          ],
+          "next": "N0037",
+          "physical_edge_count": 1,
+          "q_m": 249.31,
+          "relative_turn_deg": 1.107,
+          "remaining_oracle_distance_m": 230.497
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 300.379,
+          "edge_length_m": 44.53,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0029"
+          ],
+          "next": "N0029",
+          "physical_edge_count": 1,
+          "q_m": 334.888,
+          "relative_turn_deg": 93.498,
+          "remaining_oracle_distance_m": 290.359
+        }
+      ],
+      "oracle_action_id": "A01",
+      "oracle_next": "N0037",
+      "path_index": 1,
+      "physical_branch_factor": 2,
+      "previous": "N0043"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0037",
+      "normalized_second_best_margin": 0.280806,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 118.333,
+          "edge_length_m": 32.362,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0047"
+          ],
+          "next": "N0047",
+          "physical_edge_count": 1,
+          "q_m": 295.222,
+          "relative_turn_deg": -89.655,
+          "remaining_oracle_distance_m": 262.86
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 206.838,
+          "edge_length_m": 9.152,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0036"
+          ],
+          "next": "N0036",
+          "physical_edge_count": 1,
+          "q_m": 230.497,
+          "relative_turn_deg": -1.15,
+          "remaining_oracle_distance_m": 221.346
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0036",
+      "path_index": 2,
+      "physical_branch_factor": 2,
+      "previous": "N0041"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0036",
+      "normalized_second_best_margin": 0.623576,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 205.169,
+          "edge_length_m": 43.307,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0031"
+          ],
+          "next": "N0031",
+          "physical_edge_count": 1,
+          "q_m": 221.346,
+          "relative_turn_deg": -1.669,
+          "remaining_oracle_distance_m": 178.038
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 332.894,
+          "edge_length_m": 69.013,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0029"
+          ],
+          "next": "N0029",
+          "physical_edge_count": 1,
+          "q_m": 359.372,
+          "relative_turn_deg": 126.056,
+          "remaining_oracle_distance_m": 290.359
+        }
+      ],
+      "oracle_action_id": "A01",
+      "oracle_next": "N0031",
+      "path_index": 3,
+      "physical_branch_factor": 2,
+      "previous": "N0037"
+    },
+    {
+      "branch_factor": 3,
+      "current": "N0031",
+      "normalized_second_best_margin": 0.145014,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 117.556,
+          "edge_length_m": 33.155,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0040"
+          ],
+          "next": "N0040",
+          "physical_edge_count": 1,
+          "q_m": 203.856,
+          "relative_turn_deg": -87.613,
+          "remaining_oracle_distance_m": 170.701
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 208.436,
+          "edge_length_m": 98.059,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0025"
+          ],
+          "next": "N0025",
+          "physical_edge_count": 1,
+          "q_m": 178.038,
+          "relative_turn_deg": 3.267,
+          "remaining_oracle_distance_m": 79.979
+        },
+        {
+          "action_id": "A03",
+          "bearing_deg": 297.43,
+          "edge_length_m": 57.487,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0022"
+          ],
+          "next": "N0022",
+          "physical_edge_count": 1,
+          "q_m": 289.743,
+          "relative_turn_deg": 92.261,
+          "remaining_oracle_distance_m": 232.256
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0025",
+      "path_index": 4,
+      "physical_branch_factor": 3,
+      "previous": "N0036"
+    },
+    {
+      "branch_factor": 3,
+      "current": "N0025",
+      "normalized_second_best_margin": 0.610823,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 120.583,
+          "edge_length_m": 18.131,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0027"
+          ],
+          "next": "N0027",
+          "physical_edge_count": 1,
+          "q_m": 79.979,
+          "relative_turn_deg": -87.853,
+          "remaining_oracle_distance_m": 61.848
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 208.007,
+          "edge_length_m": 24.427,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0020",
+            "N0021"
+          ],
+          "next": "N0021",
+          "physical_edge_count": 2,
+          "q_m": 128.832,
+          "relative_turn_deg": -0.428,
+          "remaining_oracle_distance_m": 104.406
+        },
+        {
+          "action_id": "A03",
+          "bearing_deg": 300.598,
+          "edge_length_m": 31.76,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0016"
+          ],
+          "next": "N0016",
+          "physical_edge_count": 1,
+          "q_m": 143.499,
+          "relative_turn_deg": 92.162,
+          "remaining_oracle_distance_m": 111.739
+        }
+      ],
+      "oracle_action_id": "A01",
+      "oracle_next": "N0027",
+      "path_index": 5,
+      "physical_branch_factor": 3,
+      "previous": "N0031"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0027",
+      "normalized_second_best_margin": 1.359025,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 34.136,
+          "edge_length_m": 42.027,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0030"
+          ],
+          "next": "N0030",
+          "physical_edge_count": 1,
+          "q_m": 145.901,
+          "relative_turn_deg": -86.447,
+          "remaining_oracle_distance_m": 103.875
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 120.606,
+          "edge_length_m": 15.523,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0028"
+          ],
+          "next": "N0028",
+          "physical_edge_count": 1,
+          "q_m": 61.848,
+          "relative_turn_deg": 0.023,
+          "remaining_oracle_distance_m": 46.325
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0028",
+      "path_index": 6,
+      "physical_branch_factor": 2,
+      "previous": "N0025"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0028",
+      "normalized_second_best_margin": 2.512056,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 48.142,
+          "edge_length_m": 58.186,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0038"
+          ],
+          "next": "N0038",
+          "physical_edge_count": 1,
+          "q_m": 162.696,
+          "relative_turn_deg": -72.464,
+          "remaining_oracle_distance_m": 104.511
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 225.321,
+          "edge_length_m": 46.325,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0017",
+            "N0023"
+          ],
+          "next": "N0023",
+          "physical_edge_count": 2,
+          "q_m": 46.325,
+          "relative_turn_deg": 104.714,
+          "remaining_oracle_distance_m": 0.0
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0023",
+      "path_index": 7,
+      "physical_branch_factor": 2,
+      "previous": "N0027"
+    }
+  ],
+  "metrics": {
+    "bearing_greedy_accuracy": 0.857143,
+    "bearing_greedy_correct_count": 6,
+    "bearing_greedy_failure_count": 1,
+    "bearing_greedy_max_regret_ratio": 0.610823,
+    "bearing_greedy_mean_regret_ratio": 0.08726,
+    "corridor_edge_count": 202,
+    "corridor_node_count": 74,
+    "decision_count": 7,
+    "decision_load_bits": 8.169925,
+    "diagnostic_criteria_met": true,
+    "difficulty_score": 1.350282,
+    "difficulty_tier_diagnostic": "medium",
+    "graph_input_size": {
+      "chars_per_token_assumption": 3.2,
+      "compact_json_chars": 3668,
+      "estimated_tokens": 1147
+    },
+    "graph_input_size_proxy": {
+      "chars_per_token_assumption": 3.2,
+      "compact_json_chars": 3663,
+      "estimated_tokens": 1145
+    },
+    "mean_log2_branch_factor": 1.167132,
+    "mean_near_optimal_lure": 0.18315,
+    "network_circuity": 1.202267,
+    "route_length_m": 264.478,
+    "sampling_stratum": "diagnostic",
+    "scale_tier": "medium",
+    "straight_line_distance_m": 219.983
+  },
+  "oracle": {
+    "length_m": 264.478,
+    "model_node_path": [
+      42,
+      40,
+      36,
+      35,
+      30,
+      24,
+      26,
+      27,
+      22
+    ],
+    "node_path": [
+      "N0043",
+      "N0041",
+      "N0037",
+      "N0036",
+      "N0031",
+      "N0025",
+      "N0027",
+      "N0028",
+      "N0023"
+    ]
+  }
+}

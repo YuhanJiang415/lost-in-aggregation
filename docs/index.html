@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Lost in Aggregation — A Multi-Scale Diagnostic Benchmark for LLM Spatial Navigation</title>
-<meta name="description" content="A cognitively grounded, multi-scale diagnostic benchmark for LLM spatial navigation: 1,050 topology-annotated mazes across seven sizes and three difficulty tiers." />
+<meta name="description" content="A cognitively grounded, multi-scale diagnostic benchmark for LLM spatial navigation: 1,050 topology-annotated mazes across seven sizes and three difficulty tiers, plus 90 real street-network routes in Munich, Tokyo, and Toronto." />
 
 <!-- Social preview (Open Graph + Twitter). Absolute URLs required by crawlers. -->
 <meta property="og:type" content="website" />
@@ -231,6 +231,7 @@
     border-radius: var(--radius);
     padding: 20px 22px;
     overflow-x: auto;
+    white-space: pre;
     font-size: 13px;
     line-height: 1.6;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -307,6 +308,7 @@
     <!-- Paper / arXiv / Code links: re-enable here once they exist. -->
     <div class="links">
       <a class="btn" href="#data"><span class="ico">&#128190;</span> Benchmark Data</a>
+      <a class="btn alt" href="#road"><span class="ico">&#128506;</span> Real Street Networks</a>
       <a class="btn alt" href="#cite"><span class="ico">&#10078;</span> BibTeX</a>
     </div>
   </div>
@@ -473,10 +475,42 @@
   </div>
 </section>
 
+<!-- ============================ REAL STREET NETWORKS ============================ -->
+<section id="road" class="alt">
+  <div class="wrap">
+    <h2 class="sec"><span class="kicker">External Validation</span>Beyond mazes: real street networks</h2>
+    <p class="lead">Does the gap between isolated judgments and whole-route success survive outside fully observable tree mazes? We rebuilt the same three probes on OpenStreetMap pedestrian networks in Munich, Tokyo, and Toronto, where graphs have cycles and a junction can have more than one near-optimal exit.</p>
+
+    <div class="stats" style="margin-bottom:34px">
+      <div class="stat"><div class="num">90</div><div class="lab">walking routes</div></div>
+      <div class="stat"><div class="num">663</div><div class="lab">decision junctions</div></div>
+      <div class="stat"><div class="num">3</div><div class="lab">cities &times; 3 route scales</div></div>
+      <div class="stat"><div class="num">3&ndash;12</div><div class="lab">junctions per route</div></div>
+    </div>
+
+    <div class="figrow">
+      <figure class="framed">
+        <img src="assets/figures/road_cities_examples.png" alt="Street-network patches, orientation distributions, and example routes for Munich, Tokyo, and Toronto at three route scales." loading="lazy" />
+        <figcaption><b>Three cities, three scales.</b> Street-network patches and orientation distributions (<i>H</i>, orientation entropy; <i>&phi;</i>, orientation order) for Munich, Tokyo, and Toronto, each with one small (3&ndash;5 decision junctions), medium (6&ndash;8), and large (9&ndash;12) routing instance. Origin&ndash;destination pairs come from the TurnBack corpus; graphs, reference shortest paths, and decision junctions were rebuilt independently with OSMnx.</figcaption>
+      </figure>
+
+      <figure class="framed">
+        <img src="assets/figures/road_results.png" alt="Isolated judgments, complete-route performance, and junction difficulty on real street networks." loading="lazy" />
+        <figcaption><b>The gap carries over (GPT-4o).</b> <b>a</b> &mdash; Neighbor identification (Fine) stays at 99.4% (659/663) and isolated junction choice (Meso &times; Macro) reaches 64.7% (429/663), yet one-shot route planning succeeds on only 13.3% of routes (12/90): 33.3% at 3&ndash;5 junctions, 3.3% beyond. <b>b, c</b> &mdash; Junction choice gets harder with more branches (72.6% &rarr; 54.4% &rarr; 48.7%) and easier as the best exit pulls away from the runner-up in route cost (47.5% &rarr; 57.0% &rarr; 89.6% across margin tertiles).</figcaption>
+      </figure>
+    </div>
+
+    <div class="callout">
+      Two cautions on reading these numbers. Junction choice beats the branch-aware chance level in every scale, but it stays <b>below a simple bearing-greedy heuristic</b> (64.7% vs. 77.4%), so above-chance accuracy is not evidence of an advantage over a basic spatial rule. And the branch-count and cost-margin associations are exploratory: they describe which isolated junctions are hard, not why complete routes fail.
+    </div>
+  </div>
+</section>
+
 <!-- ============================ DATA & DOWNLOAD ============================ -->
-<section id="data" class="alt">
+<section id="data">
   <div class="wrap">
     <h2 class="sec"><span class="kicker">Download</span>Benchmark data</h2>
+    <h3 style="margin:18px 0 8px; font-size:22px">Mazes</h3>
     <p class="lead">All 1,050 mazes are released as JSON, one file per effective size (150 mazes each: 50 per difficulty tier). Every maze is fully topology-annotated — usable as a drop-in spatial-reasoning benchmark for any model.</p>
 
     <table class="dl">
@@ -521,14 +555,80 @@
     <span class="k">"dead_ends"</span>:      [[r,c], ...]
   }
 }</div>
+
+    <h3 id="road-data" style="margin:46px 0 8px; font-size:22px">Real street-network routes <span style="font-size:13px; font-weight:600; color:var(--muted)">&nbsp;LIA-Road-TB v0.2.0</span></h3>
+    <p class="lead">The frozen 90-route release the reported model calls were run on: anonymized corridor graphs in local metric coordinates, reference shortest paths, and answer keys for all 663 decision junctions. Plain JSON / JSONL, kept in the repository under <a href="https://github.com/YuhanJiang415/lost-in-aggregation/tree/main/road_network"><code>road_network/</code></a>.</p>
+
+    <div class="links" style="justify-content:flex-start; margin:0 0 22px">
+      <a class="btn" href="https://github.com/YuhanJiang415/lost-in-aggregation/raw/main/road_network/LIA-Road-TB_v0.2.0.zip"><span class="ico">&#128190;</span> Download all (zip, 1.2 MB)</a>
+      <a class="btn alt" href="https://github.com/YuhanJiang415/lost-in-aggregation/tree/main/road_network"><span class="ico">&#128193;</span> Browse on GitHub</a>
+      <a class="btn alt" href="https://github.com/YuhanJiang415/lost-in-aggregation/blob/main/road_network/route_index.csv"><span class="ico">&#128203;</span> Route index (CSV)</a>
+    </div>
+
+    <div style="overflow-x:auto"><table class="dl">
+      <thead>
+        <tr><th>Path in <code>v0.2.0/</code></th><th>Contents</th><th class="num">Items</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>inputs/*.graph.json</code></td><td>Compact graph the model reads: nodes, directed edges with lengths, start, goal</td><td class="num">90</td></tr>
+        <tr><td><code>routes/*.json</code></td><td>Full record: graph, reference path, decision junctions, metrics, provenance</td><td class="num">90</td></tr>
+        <tr><td><code>labels/*.labels.json</code></td><td>Answer key: reference path and per-junction options with route costs</td><td class="num">90</td></tr>
+        <tr><td><code>tasks/c1_routes.jsonl</code></td><td>One-shot route-planning tasks</td><td class="num">90</td></tr>
+        <tr><td><code>tasks/c2_junctions.jsonl</code></td><td>Isolated junction-choice tasks, with acceptable actions in <code>labels/c2_junction_labels.jsonl</code></td><td class="num">663</td></tr>
+        <tr><td><code>tasks/c3_hybrid_episodes.jsonl</code></td><td>Step-wise junction-delegation episodes (no results reported in the paper)</td><td class="num">90</td></tr>
+        <tr><td><code>manifest.jsonl</code></td><td>Per-route metrics and SHA-256, plus <code>dataset_card.json</code> and <code>audit_report.json</code></td><td class="num">90</td></tr>
+      </tbody>
+    </table></div>
+
+    <div style="overflow-x:auto; margin-top:18px"><table class="dl">
+      <thead>
+        <tr><th>Scale</th><th>Decision junctions per route</th><th class="num">Routes</th><th class="num">Junctions</th><th class="num">Median nodes</th><th class="num">Median length</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Small</td><td>3&ndash;5</td><td class="num">30</td><td class="num">121</td><td class="num">36.5</td><td class="num">280 m</td></tr>
+        <tr><td>Medium</td><td>6&ndash;8</td><td class="num">30</td><td class="num">216</td><td class="num">88</td><td class="num">412 m</td></tr>
+        <tr><td>Large</td><td>9&ndash;12</td><td class="num">30</td><td class="num">326</td><td class="num">139.5</td><td class="num">507 m</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout">
+      Each city &times; scale cell holds 10 routes: 5 representative and 5 diagnostic (enriched, before any model was run, for junctions where a bearing-greedy heuristic goes wrong). Exits within 5 m or 1% of the best route cost all count as correct, so a junction can have more than one acceptable answer. Route scale is correlated with input length (Spearman 0.77 between junction count and estimated tokens); the release's audit report records this unmet balance check. Details are in the <a href="https://github.com/YuhanJiang415/lost-in-aggregation/blob/main/road_network/README.md">dataset README</a>.
+    </div>
+
+    <h3 style="margin:34px 0 12px; font-size:18px">Per-route input schema</h3>
+    <div class="schema"><span class="c">// inputs/LIA-Road-TB-045.graph.json</span>
+{
+  <span class="k">"schema"</span>: <span class="s">"physical-decision-graph-v2"</span>,
+  <span class="k">"dataset_id"</span>: <span class="s">"LIA-Road-TB-045"</span>,
+  <span class="k">"mode"</span>: <span class="s">"walking"</span>,
+  <span class="k">"node_fields"</span>: [<span class="s">"x_m"</span>, <span class="s">"y_m"</span>],
+  <span class="k">"nodes"</span>: [[-207.1, -142.5], ...],        <span class="c">// node id = zero-based row index; local metres</span>
+  <span class="k">"edge_fields"</span>: [<span class="s">"from"</span>, <span class="s">"to"</span>, <span class="s">"length_m"</span>],
+  <span class="k">"edges"</span>: [[0, 1, 37.1], ...],            <span class="c">// directed</span>
+  <span class="k">"start"</span>: 42,  <span class="k">"goal"</span>: 22
+}
+
+<span class="c">// one line of tasks/c2_junctions.jsonl</span>
+{
+  <span class="k">"task_id"</span>: <span class="s">"LIA-Road-TB-001-J01"</span>,
+  <span class="k">"graph_file"</span>: <span class="s">"inputs/LIA-Road-TB-001.graph.json"</span>,
+  <span class="k">"previous"</span>: 24,  <span class="k">"current"</span>: 27,  <span class="k">"goal"</span>: 161,
+  <span class="k">"actions"</span>: [
+    { <span class="k">"action_id"</span>: <span class="s">"A01"</span>, <span class="k">"exit_to"</span>: 41, <span class="k">"equivalent_exit_nodes"</span>: [41] },
+    { <span class="k">"action_id"</span>: <span class="s">"A02"</span>, <span class="k">"exit_to"</span>: 26, <span class="k">"equivalent_exit_nodes"</span>: [26] }
+  ],
+  <span class="k">"required_output"</span>: <span class="s">"one action_id"</span>
+}</div>
+
+    <p style="color:var(--muted); font-size:13.5px; margin:16px 0 0">Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, available under the Open Database License. Origin&ndash;destination pairs from <a href="https://github.com/bghjmn32/EMNLP2025_Turnback">TurnBack</a>; networks extracted with OSMnx.</p>
   </div>
 </section>
 
 <!-- ============================ CODE ============================ -->
-<section>
+<section class="alt">
   <div class="wrap">
     <h2 class="sec"><span class="kicker">Reproduce</span>Code &amp; harness</h2>
-    <p class="lead">We will release the maze generator, the four input encoders, the isolated-probe generators with answer keys, the junction-delegation harness, and all evaluation and plotting code. The benchmark data is available now.</p>
+    <p class="lead">We will release the maze generator, the four input encoders, the isolated-probe generators with answer keys, the junction-delegation harness, and all evaluation and plotting code. The benchmark data &mdash; mazes and real street-network routes &mdash; is available now.</p>
     <div class="links" style="justify-content:flex-start">
       <a class="btn" href="#data"><span class="ico">&#128190;</span> Download the data</a>
       <span class="btn alt" style="cursor:default;opacity:.7"><span class="ico">&#128187;</span> Code &mdash; coming soon</span>
@@ -540,7 +640,7 @@
 </section>
 
 <!-- ============================ CITATION ============================ -->
-<section id="cite" class="alt">
+<section id="cite">
   <div class="wrap">
     <h2 class="sec"><span class="kicker">Cite</span>BibTeX</h2>
     <div class="copybar">

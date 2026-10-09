@@ -1,0 +1,619 @@
+{
+  "baselines": {
+    "bearing_greedy_end_to_end": {
+      "execution_policy": {
+        "maximum_decision_calls_multiplier": 4,
+        "maximum_directed_state_visits": 3,
+        "maximum_path_stretch": 2.5,
+        "minimum_maximum_decision_calls": 20,
+        "state_counting_rule": "count total occurrences of (previous,current); terminate before acting on occurrence maximum_directed_state_visits + 1",
+        "terminal_precedence": "distance_limit, goal, loop"
+      },
+      "length_m": 95.358,
+      "path": [
+        "N0005",
+        "N0006",
+        "N0008",
+        "N0009",
+        "N0011"
+      ],
+      "reached_goal_node": true,
+      "step_count": 4,
+      "stretch": 1.000006,
+      "success": true,
+      "termination": "goal"
+    },
+    "bearing_greedy_oracle_junctions": {
+      "bearing_greedy_accuracy": 1.0,
+      "bearing_greedy_correct_count": 3,
+      "bearing_greedy_failure_count": 0,
+      "bearing_greedy_max_regret_ratio": 0.0,
+      "bearing_greedy_mean_regret_ratio": 0.0,
+      "junctions": [
+        {
+          "greedy_action_id": "A01",
+          "greedy_correct": true,
+          "greedy_next": "N0008",
+          "greedy_regret_ratio": 0.0,
+          "path_index": 1,
+          "target_bearing_deg": 23.155
+        },
+        {
+          "greedy_action_id": "A01",
+          "greedy_correct": true,
+          "greedy_next": "N0009",
+          "greedy_regret_ratio": 0.0,
+          "path_index": 2,
+          "target_bearing_deg": 29.285
+        },
+        {
+          "greedy_action_id": "A01",
+          "greedy_correct": true,
+          "greedy_next": "N0011",
+          "greedy_regret_ratio": 0.0,
+          "path_index": 3,
+          "target_bearing_deg": 29.273
+        }
+      ]
+    }
+  },
+  "dataset_id": "LIA-Road-TB-056",
+  "decisions": [
+    {
+      "branch_factor": 2,
+      "current": "N0006",
+      "normalized_second_best_margin": 0.636761,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 15.308,
+          "edge_length_m": 37.422,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0008"
+          ],
+          "next": "N0008",
+          "physical_edge_count": 1,
+          "q_m": 85.211,
+          "relative_turn_deg": -0.677,
+          "remaining_oracle_distance_m": 47.789
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 83.449,
+          "edge_length_m": 27.129,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0010"
+          ],
+          "next": "N0010",
+          "physical_edge_count": 1,
+          "q_m": 139.47,
+          "relative_turn_deg": 67.464,
+          "remaining_oracle_distance_m": 112.34
+        }
+      ],
+      "oracle_action_id": "A01",
+      "oracle_next": "N0008",
+      "path_index": 1,
+      "physical_branch_factor": 2,
+      "previous": "N0005"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0008",
+      "normalized_second_best_margin": 0.862709,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 29.297,
+          "edge_length_m": 23.619,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0009"
+          ],
+          "next": "N0009",
+          "physical_edge_count": 1,
+          "q_m": 47.789,
+          "relative_turn_deg": 13.989,
+          "remaining_oracle_distance_m": 24.17
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 63.441,
+          "edge_length_m": 60.455,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0013"
+          ],
+          "next": "N0013",
+          "physical_edge_count": 1,
+          "q_m": 89.017,
+          "relative_turn_deg": 48.133,
+          "remaining_oracle_distance_m": 28.562
+        }
+      ],
+      "oracle_action_id": "A01",
+      "oracle_next": "N0009",
+      "path_index": 2,
+      "physical_branch_factor": 2,
+      "previous": "N0006"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0009",
+      "normalized_second_best_margin": 2.846711,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 29.273,
+          "edge_length_m": 24.17,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0011"
+          ],
+          "next": "N0011",
+          "physical_edge_count": 1,
+          "q_m": 24.17,
+          "relative_turn_deg": -0.024,
+          "remaining_oracle_distance_m": 0.0
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 302.217,
+          "edge_length_m": 34.403,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0003"
+          ],
+          "next": "N0003",
+          "physical_edge_count": 1,
+          "q_m": 92.975,
+          "relative_turn_deg": -87.08,
+          "remaining_oracle_distance_m": 58.572
+        }
+      ],
+      "oracle_action_id": "A01",
+      "oracle_next": "N0011",
+      "path_index": 3,
+      "physical_branch_factor": 2,
+      "previous": "N0008"
+    }
+  ],
+  "derivation": {
+    "kind": "oracle_subroute",
+    "requested_sampling_stratum": "representative",
+    "source_full_route_decision_count": 24,
+    "source_full_route_length_m": 685.724,
+    "source_path_window": [
+      2,
+      6
+    ],
+    "target_decision_count": 3,
+    "target_scale": "small"
+  },
+  "execution_policy": {
+    "maximum_decision_calls_multiplier": 4,
+    "maximum_directed_state_visits": 3,
+    "maximum_path_stretch": 2.5,
+    "minimum_maximum_decision_calls": 20,
+    "state_counting_rule": "count total occurrences of (previous,current); terminate before acting on occurrence maximum_directed_state_visits + 1",
+    "terminal_precedence": "distance_limit, goal, loop"
+  },
+  "graph": {
+    "edges": [
+      {
+        "action_id": "A01",
+        "bearing_deg": 142.969,
+        "edge_key": "0",
+        "from": "N0001",
+        "length_m": 46.459,
+        "to": "N0005"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 11.33,
+        "edge_key": "0",
+        "from": "N0002",
+        "length_m": 14.406,
+        "to": "N0004"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 122.217,
+        "edge_key": "0",
+        "from": "N0003",
+        "length_m": 34.403,
+        "to": "N0009"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 191.33,
+        "edge_key": "0",
+        "from": "N0004",
+        "length_m": 14.406,
+        "to": "N0002"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 14.287,
+        "edge_key": "0",
+        "from": "N0004",
+        "length_m": 18.713,
+        "to": "N0005"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 47.831,
+        "edge_key": "0",
+        "from": "N0004",
+        "length_m": 59.293,
+        "to": "N0010"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 322.969,
+        "edge_key": "0",
+        "from": "N0005",
+        "length_m": 46.459,
+        "to": "N0001"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 194.287,
+        "edge_key": "0",
+        "from": "N0005",
+        "length_m": 18.713,
+        "to": "N0004"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 15.985,
+        "edge_key": "0",
+        "from": "N0005",
+        "length_m": 10.147,
+        "to": "N0006"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 195.985,
+        "edge_key": "0",
+        "from": "N0006",
+        "length_m": 10.147,
+        "to": "N0005"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 15.308,
+        "edge_key": "0",
+        "from": "N0006",
+        "length_m": 37.422,
+        "to": "N0008"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 83.449,
+        "edge_key": "0",
+        "from": "N0006",
+        "length_m": 27.129,
+        "to": "N0010"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 131.956,
+        "edge_key": "0",
+        "from": "N0007",
+        "length_m": 42.492,
+        "to": "N0011"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 195.308,
+        "edge_key": "0",
+        "from": "N0008",
+        "length_m": 37.422,
+        "to": "N0006"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 29.297,
+        "edge_key": "0",
+        "from": "N0008",
+        "length_m": 23.619,
+        "to": "N0009"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 63.441,
+        "edge_key": "0",
+        "from": "N0008",
+        "length_m": 60.455,
+        "to": "N0013"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 302.217,
+        "edge_key": "0",
+        "from": "N0009",
+        "length_m": 34.403,
+        "to": "N0003"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 209.297,
+        "edge_key": "0",
+        "from": "N0009",
+        "length_m": 23.619,
+        "to": "N0008"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 29.273,
+        "edge_key": "0",
+        "from": "N0009",
+        "length_m": 24.17,
+        "to": "N0011"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 227.831,
+        "edge_key": "0",
+        "from": "N0010",
+        "length_m": 59.293,
+        "to": "N0004"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 263.449,
+        "edge_key": "0",
+        "from": "N0010",
+        "length_m": 27.129,
+        "to": "N0006"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 311.956,
+        "edge_key": "0",
+        "from": "N0011",
+        "length_m": 42.492,
+        "to": "N0007"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 209.273,
+        "edge_key": "0",
+        "from": "N0011",
+        "length_m": 24.17,
+        "to": "N0009"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 134.268,
+        "edge_key": "0",
+        "from": "N0011",
+        "length_m": 11.195,
+        "to": "N0012"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 314.268,
+        "edge_key": "0",
+        "from": "N0012",
+        "length_m": 11.195,
+        "to": "N0011"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 132.494,
+        "edge_key": "0",
+        "from": "N0012",
+        "length_m": 17.367,
+        "to": "N0013"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 42.356,
+        "edge_key": "0",
+        "from": "N0012",
+        "length_m": 54.886,
+        "to": "N0014"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 243.441,
+        "edge_key": "0",
+        "from": "N0013",
+        "length_m": 60.455,
+        "to": "N0008"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 312.494,
+        "edge_key": "0",
+        "from": "N0013",
+        "length_m": 17.367,
+        "to": "N0012"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 134.614,
+        "edge_key": "0",
+        "from": "N0013",
+        "length_m": 119.481,
+        "to": "N0015"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 222.356,
+        "edge_key": "0",
+        "from": "N0014",
+        "length_m": 54.886,
+        "to": "N0012"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 314.614,
+        "edge_key": "0",
+        "from": "N0015",
+        "length_m": 119.481,
+        "to": "N0013"
+      }
+    ],
+    "goal": "N0011",
+    "nodes": [
+      {
+        "id": "N0001",
+        "x_m": -20.399,
+        "y_m": 27.041
+      },
+      {
+        "id": "N0002",
+        "x_m": -7.432,
+        "y_m": -32.189
+      },
+      {
+        "id": "N0003",
+        "x_m": -4.945,
+        "y_m": 84.665
+      },
+      {
+        "id": "N0004",
+        "x_m": -4.608,
+        "y_m": -18.096
+      },
+      {
+        "id": "N0005",
+        "x_m": 0.0,
+        "y_m": 0.0
+      },
+      {
+        "id": "N0006",
+        "x_m": 2.789,
+        "y_m": 9.734
+      },
+      {
+        "id": "N0007",
+        "x_m": 4.393,
+        "y_m": 115.768
+      },
+      {
+        "id": "N0008",
+        "x_m": 12.644,
+        "y_m": 45.739
+      },
+      {
+        "id": "N0009",
+        "x_m": 24.186,
+        "y_m": 66.309
+      },
+      {
+        "id": "N0010",
+        "x_m": 29.505,
+        "y_m": 12.802
+      },
+      {
+        "id": "N0011",
+        "x_m": 35.988,
+        "y_m": 87.363
+      },
+      {
+        "id": "N0012",
+        "x_m": 44.004,
+        "y_m": 79.549
+      },
+      {
+        "id": "N0013",
+        "x_m": 56.811,
+        "y_m": 67.817
+      },
+      {
+        "id": "N0014",
+        "x_m": 80.967,
+        "y_m": 120.091
+      },
+      {
+        "id": "N0015",
+        "x_m": 141.545,
+        "y_m": -15.783
+      }
+    ],
+    "start": "N0005"
+  },
+  "metrics": {
+    "bearing_greedy_accuracy": 1.0,
+    "bearing_greedy_correct_count": 3,
+    "bearing_greedy_failure_count": 0,
+    "bearing_greedy_max_regret_ratio": 0.0,
+    "bearing_greedy_mean_regret_ratio": 0.0,
+    "corridor_edge_count": 32,
+    "corridor_node_count": 15,
+    "decision_count": 3,
+    "decision_load_bits": 3.0,
+    "diagnostic_criteria_met": false,
+    "difficulty_score": 1.09118,
+    "difficulty_tier_diagnostic": "low",
+    "graph_input_size": {
+      "chars_per_token_assumption": 3.2,
+      "compact_json_chars": 790,
+      "estimated_tokens": 247
+    },
+    "graph_input_size_proxy": {
+      "chars_per_token_assumption": 3.2,
+      "compact_json_chars": 785,
+      "estimated_tokens": 246
+    },
+    "mean_log2_branch_factor": 1.0,
+    "mean_near_optimal_lure": 0.09118,
+    "network_circuity": 1.009229,
+    "route_length_m": 95.357,
+    "sampling_stratum": "representative",
+    "scale_tier": "small",
+    "straight_line_distance_m": 94.485
+  },
+  "oracle": {
+    "length_m": 95.357,
+    "node_path": [
+      "N0005",
+      "N0006",
+      "N0008",
+      "N0009",
+      "N0011"
+    ]
+  },
+  "quality": {
+    "builder_bbox_buffer_m": 300.0,
+    "exit_arm_bearing_tolerance_deg": 20.0,
+    "frozen_raw_graph": "raw_graphs/Tokyo_23_wards__easy__377__ff81b3c3a547.graphml",
+    "frozen_raw_graph_sha256": "bbc41fe3512a4338e6b990e2cface46049f0a172d57092a9e63c0a69f479de8f",
+    "osm_bbox_wsen": [
+      139.5934594,
+      35.7675931,
+      139.6028696,
+      35.7766839
+    ],
+    "osm_download_utc": "2026-09-17T15:59:59.364467+00:00",
+    "passed_automatic_checks": true,
+    "physical_intersection_merge_distance_m": 8.0,
+    "source_goal_snap_distance_m": 0.038,
+    "source_oracle_boundary_clearance_m": 299.978,
+    "source_start_snap_distance_m": 0.024,
+    "warnings": []
+  },
+  "source": {
+    "city": "Tokyo_23_wards",
+    "commit": "561feb73b7b32088a69689ae063de794da35f0d1",
+    "dataset": "TurnBack",
+    "repository": "bghjmn32/EMNLP2025_Turnback",
+    "route_geojson_sha256": "9232f117010eca553f7bfcefaec42b01226db73ba651231a7dbfbd81081ba7c9",
+    "route_id": "377",
+    "source_distance_m": 679.3,
+    "source_duration_s": 489.1,
+    "tier": "easy"
+  }
+}

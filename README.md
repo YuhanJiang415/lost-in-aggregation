@@ -31,15 +31,31 @@ mazes_s{3,5,7,10,15,20,30}.json   # 150 mazes each
 summary.json                       # corpus manifest (included in the Release)
 ```
 
+### Real street-network routes
+
+The external validation uses **90 walking routes with 663 decision junctions**
+on OpenStreetMap pedestrian networks in Munich, Tokyo, and Toronto (10 routes
+per city at each of three scales: 3–5, 6–8, and 9–12 decision junctions). The
+frozen release (`LIA-Road-TB` v0.2.0, ~9 MB of JSON) lives in this repository
+under [`road_network/`](road_network/): compact model-input graphs, reference
+shortest paths, per-junction answer keys, and task files. See
+[`road_network/README.md`](road_network/README.md) for the schema and scoring
+rules, or grab [`LIA-Road-TB_v0.2.0.zip`](road_network/LIA-Road-TB_v0.2.0.zip).
+
+Map data © OpenStreetMap contributors (ODbL); origin–destination pairs from
+[TurnBack](https://github.com/bghjmn32/EMNLP2025_Turnback).
+
 ## Repository layout
 
 ```
-docs/   # project homepage (GitHub Pages, served from /docs)
+docs/           # project homepage (GitHub Pages, served from /docs)
+road_network/   # real street-network routes (LIA-Road-TB v0.2.0)
 ```
 
 The maze generator, input encoders, and evaluation/figure code are not yet
-published; they will be released here. The benchmark data is available now via
-[Releases](https://github.com/YuhanJiang415/lost-in-aggregation/releases/tag/v0.1).
+published; they will be released here. The benchmark data is available now: the
+mazes via [Releases](https://github.com/YuhanJiang415/lost-in-aggregation/releases/tag/v0.1),
+the street-network routes in [`road_network/`](road_network/).
 
 ## Citation
 

@@ -1,0 +1,76 @@
+{
+  "audited_utc": "2026-09-18T15:47:27.629128+00:00",
+  "c3_oracle_executor_passed": 90,
+  "counts_by_city_scale": {
+    "Munich_Germany|large": 10,
+    "Munich_Germany|medium": 10,
+    "Munich_Germany|small": 10,
+    "Tokyo_23_wards|large": 10,
+    "Tokyo_23_wards|medium": 10,
+    "Tokyo_23_wards|small": 10,
+    "Toronto_Canada|large": 10,
+    "Toronto_Canada|medium": 10,
+    "Toronto_Canada|small": 10
+  },
+  "errors": [],
+  "formal_release_ready": false,
+  "model_gate_status": "not_run",
+  "passed": true,
+  "ready_for_model_pilot": true,
+  "route_count": 90,
+  "selection_complete": true,
+  "selection_shortfalls": [],
+  "structural_passed": true,
+  "task_counts": {
+    "c1": 90,
+    "c2": 663,
+    "c2_labels": 663,
+    "c3": 90
+  },
+  "token_balance": {
+    "by_scale": {
+      "large": {
+        "maximum_estimated_tokens": 5869,
+        "median_estimated_tokens": 2223.5,
+        "minimum_estimated_tokens": 1108,
+        "n": 30
+      },
+      "medium": {
+        "maximum_estimated_tokens": 5273,
+        "median_estimated_tokens": 1384.5,
+        "minimum_estimated_tokens": 469,
+        "n": 30
+      },
+      "small": {
+        "maximum_estimated_tokens": 3464,
+        "median_estimated_tokens": 593.0,
+        "minimum_estimated_tokens": 247,
+        "n": 30
+      }
+    },
+    "by_stratum": {
+      "diagnostic": {
+        "maximum_estimated_tokens": 5869,
+        "median_estimated_tokens": 1429.0,
+        "minimum_estimated_tokens": 247,
+        "n": 45
+      },
+      "representative": {
+        "maximum_estimated_tokens": 5741,
+        "median_estimated_tokens": 1200.0,
+        "minimum_estimated_tokens": 247,
+        "n": 45
+      }
+    },
+    "decision_count_token_spearman": 0.774707,
+    "scale_common_support_estimated_tokens": [
+      1108,
+      3464
+    ]
+  },
+  "token_balance_enforced": false,
+  "token_balance_errors": [
+    "decision-count/token Spearman exceeds configured maximum"
+  ],
+  "token_balance_passed": false
+}

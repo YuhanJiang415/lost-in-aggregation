@@ -1,0 +1,1165 @@
+{
+  "baselines": {
+    "bearing_greedy_end_to_end": {
+      "execution_policy": {
+        "maximum_decision_calls_multiplier": 4,
+        "maximum_directed_state_visits": 3,
+        "maximum_path_stretch": 2.5,
+        "minimum_maximum_decision_calls": 20,
+        "state_counting_rule": "count total occurrences of (previous,current); terminate before acting on occurrence maximum_directed_state_visits + 1",
+        "terminal_precedence": "distance_limit, goal, loop"
+      },
+      "length_m": 691.893,
+      "path": [
+        "N0008",
+        "N0012",
+        "N0013",
+        "N0017",
+        "N0001",
+        "N0017"
+      ],
+      "reached_goal_node": false,
+      "step_count": 5,
+      "stretch": null,
+      "success": false,
+      "termination": "distance_limit"
+    },
+    "bearing_greedy_oracle_junctions": {
+      "bearing_greedy_accuracy": 0.75,
+      "bearing_greedy_correct_count": 3,
+      "bearing_greedy_failure_count": 1,
+      "bearing_greedy_max_regret_ratio": 17.154491,
+      "bearing_greedy_mean_regret_ratio": 4.288623,
+      "junctions": [
+        {
+          "greedy_action_id": "A02",
+          "greedy_correct": true,
+          "greedy_next": "N0013",
+          "greedy_regret_ratio": 0.0,
+          "path_index": 1,
+          "target_bearing_deg": 172.232
+        },
+        {
+          "greedy_action_id": "A02",
+          "greedy_correct": true,
+          "greedy_next": "N0017",
+          "greedy_regret_ratio": 0.0,
+          "path_index": 2,
+          "target_bearing_deg": 173.675
+        },
+        {
+          "greedy_action_id": "A03",
+          "greedy_correct": false,
+          "greedy_next": "N0001",
+          "greedy_regret_ratio": 17.154491,
+          "path_index": 3,
+          "target_bearing_deg": 223.23
+        },
+        {
+          "greedy_action_id": "A02",
+          "greedy_correct": true,
+          "greedy_next": "N0015",
+          "greedy_regret_ratio": 0.0,
+          "path_index": 4,
+          "target_bearing_deg": 264.534
+        }
+      ]
+    }
+  },
+  "dataset_id": "LIA-Road-TB-081",
+  "decisions": [
+    {
+      "branch_factor": 3,
+      "current": "N0012",
+      "normalized_second_best_margin": 0.193433,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 72.694,
+          "edge_length_m": 13.027,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0014"
+          ],
+          "next": "N0014",
+          "physical_edge_count": 1,
+          "q_m": 160.753,
+          "relative_turn_deg": -92.994,
+          "remaining_oracle_distance_m": 147.725
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 161.805,
+          "edge_length_m": 13.909,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0013"
+          ],
+          "next": "N0013",
+          "physical_edge_count": 1,
+          "q_m": 134.698,
+          "relative_turn_deg": -3.883,
+          "remaining_oracle_distance_m": 120.789
+        },
+        {
+          "action_id": "A03",
+          "bearing_deg": 252.936,
+          "edge_length_m": 61.158,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0005"
+          ],
+          "next": "N0005",
+          "physical_edge_count": 1,
+          "q_m": 257.013,
+          "relative_turn_deg": 87.248,
+          "remaining_oracle_distance_m": 195.856
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0013",
+      "path_index": 1,
+      "physical_branch_factor": 3,
+      "previous": "N0008"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0013",
+      "normalized_second_best_margin": 0.216791,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 73.885,
+          "edge_length_m": 13.093,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0016"
+          ],
+          "next": "N0016",
+          "physical_edge_count": 1,
+          "q_m": 146.975,
+          "relative_turn_deg": -87.92,
+          "remaining_oracle_distance_m": 133.882
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 164.611,
+          "edge_length_m": 91.783,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0017"
+          ],
+          "next": "N0017",
+          "physical_edge_count": 1,
+          "q_m": 120.789,
+          "relative_turn_deg": 2.806,
+          "remaining_oracle_distance_m": 29.005
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0017",
+      "path_index": 2,
+      "physical_branch_factor": 2,
+      "previous": "N0012"
+    },
+    {
+      "branch_factor": 3,
+      "current": "N0017",
+      "normalized_second_best_margin": 1.270126,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 74.154,
+          "edge_length_m": 18.42,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0019"
+          ],
+          "next": "N0019",
+          "physical_edge_count": 1,
+          "q_m": 65.845,
+          "relative_turn_deg": -90.457,
+          "remaining_oracle_distance_m": 47.425
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 173.108,
+          "edge_length_m": 13.313,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0018"
+          ],
+          "next": "N0018",
+          "physical_edge_count": 1,
+          "q_m": 29.005,
+          "relative_turn_deg": 8.497,
+          "remaining_oracle_distance_m": 15.693
+        },
+        {
+          "action_id": "A03",
+          "bearing_deg": 251.687,
+          "edge_length_m": 248.783,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0001"
+          ],
+          "next": "N0001",
+          "physical_edge_count": 1,
+          "q_m": 526.571,
+          "relative_turn_deg": 87.076,
+          "remaining_oracle_distance_m": 277.788
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0018",
+      "path_index": 3,
+      "physical_branch_factor": 3,
+      "previous": "N0013"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0018",
+      "normalized_second_best_margin": 4.761167,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 76.266,
+          "edge_length_m": 37.358,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0021"
+          ],
+          "next": "N0021",
+          "physical_edge_count": 1,
+          "q_m": 90.41,
+          "relative_turn_deg": -96.842,
+          "remaining_oracle_distance_m": 53.051
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 264.534,
+          "edge_length_m": 15.693,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0015"
+          ],
+          "next": "N0015",
+          "physical_edge_count": 1,
+          "q_m": 15.693,
+          "relative_turn_deg": 91.426,
+          "remaining_oracle_distance_m": 0.0
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0015",
+      "path_index": 4,
+      "physical_branch_factor": 2,
+      "previous": "N0017"
+    }
+  ],
+  "derivation": {
+    "kind": "oracle_subroute",
+    "requested_sampling_stratum": "diagnostic",
+    "source_full_route_decision_count": 21,
+    "source_full_route_length_m": 1141.312,
+    "source_path_window": [
+      1,
+      6
+    ],
+    "target_decision_count": 4,
+    "target_scale": "small"
+  },
+  "execution_policy": {
+    "maximum_decision_calls_multiplier": 4,
+    "maximum_directed_state_visits": 3,
+    "maximum_path_stretch": 2.5,
+    "minimum_maximum_decision_calls": 20,
+    "state_counting_rule": "count total occurrences of (previous,current); terminate before acting on occurrence maximum_directed_state_visits + 1",
+    "terminal_precedence": "distance_limit, goal, loop"
+  },
+  "graph": {
+    "edges": [
+      {
+        "action_id": "A01",
+        "bearing_deg": 71.687,
+        "edge_key": "0",
+        "from": "N0001",
+        "length_m": 248.783,
+        "to": "N0017"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.731,
+        "edge_key": "0",
+        "from": "N0002",
+        "length_m": 142.3,
+        "to": "N0007"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 71.906,
+        "edge_key": "0",
+        "from": "N0003",
+        "length_m": 176.157,
+        "to": "N0015"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 71.696,
+        "edge_key": "0",
+        "from": "N0004",
+        "length_m": 11.581,
+        "to": "N0006"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 162.872,
+        "edge_key": "0",
+        "from": "N0004",
+        "length_m": 85.466,
+        "to": "N0007"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.936,
+        "edge_key": "0",
+        "from": "N0005",
+        "length_m": 61.158,
+        "to": "N0012"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 251.696,
+        "edge_key": "0",
+        "from": "N0006",
+        "length_m": 11.581,
+        "to": "N0004"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 161.437,
+        "edge_key": "0",
+        "from": "N0006",
+        "length_m": 85.667,
+        "to": "N0009"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 252.731,
+        "edge_key": "0",
+        "from": "N0007",
+        "length_m": 142.3,
+        "to": "N0002"
+      },
+      {
+        "action_id": "A04",
+        "bearing_deg": 342.872,
+        "edge_key": "0",
+        "from": "N0007",
+        "length_m": 85.466,
+        "to": "N0004"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 141.388,
+        "edge_key": "0",
+        "from": "N0007",
+        "length_m": 14.909,
+        "to": "N0008"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.357,
+        "edge_key": "0",
+        "from": "N0007",
+        "length_m": 13.706,
+        "to": "N0009"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 321.388,
+        "edge_key": "0",
+        "from": "N0008",
+        "length_m": 14.909,
+        "to": "N0007"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 79.198,
+        "edge_key": "0",
+        "from": "N0008",
+        "length_m": 14.484,
+        "to": "N0010"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 165.688,
+        "edge_key": "0",
+        "from": "N0008",
+        "length_m": 88.635,
+        "to": "N0012"
+      },
+      {
+        "action_id": "A04",
+        "bearing_deg": 341.437,
+        "edge_key": "0",
+        "from": "N0009",
+        "length_m": 85.667,
+        "to": "N0006"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 252.357,
+        "edge_key": "0",
+        "from": "N0009",
+        "length_m": 13.706,
+        "to": "N0007"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 149.232,
+        "edge_key": "0",
+        "from": "N0009",
+        "length_m": 16.27,
+        "to": "N0010"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.929,
+        "edge_key": "0",
+        "from": "N0009",
+        "length_m": 320.792,
+        "to": "N0027"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 259.198,
+        "edge_key": "0",
+        "from": "N0010",
+        "length_m": 14.484,
+        "to": "N0008"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 329.232,
+        "edge_key": "0",
+        "from": "N0010",
+        "length_m": 16.27,
+        "to": "N0009"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.762,
+        "edge_key": "0",
+        "from": "N0010",
+        "length_m": 316.518,
+        "to": "N0028"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 164.48,
+        "edge_key": "0",
+        "from": "N0011",
+        "length_m": 49.611,
+        "to": "N0014"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 252.936,
+        "edge_key": "0",
+        "from": "N0012",
+        "length_m": 61.158,
+        "to": "N0005"
+      },
+      {
+        "action_id": "A04",
+        "bearing_deg": 345.688,
+        "edge_key": "0",
+        "from": "N0012",
+        "length_m": 88.635,
+        "to": "N0008"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 161.805,
+        "edge_key": "0",
+        "from": "N0012",
+        "length_m": 13.909,
+        "to": "N0013"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.694,
+        "edge_key": "0",
+        "from": "N0012",
+        "length_m": 13.027,
+        "to": "N0014"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 341.805,
+        "edge_key": "0",
+        "from": "N0013",
+        "length_m": 13.909,
+        "to": "N0012"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 73.885,
+        "edge_key": "0",
+        "from": "N0013",
+        "length_m": 13.093,
+        "to": "N0016"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 164.611,
+        "edge_key": "0",
+        "from": "N0013",
+        "length_m": 91.783,
+        "to": "N0017"
+      },
+      {
+        "action_id": "A04",
+        "bearing_deg": 344.48,
+        "edge_key": "0",
+        "from": "N0014",
+        "length_m": 49.611,
+        "to": "N0011"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 252.694,
+        "edge_key": "0",
+        "from": "N0014",
+        "length_m": 13.027,
+        "to": "N0012"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 161.566,
+        "edge_key": "0",
+        "from": "N0014",
+        "length_m": 14.183,
+        "to": "N0016"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.453,
+        "edge_key": "0",
+        "from": "N0014",
+        "length_m": 307.986,
+        "to": "N0029"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 251.906,
+        "edge_key": "0",
+        "from": "N0015",
+        "length_m": 176.157,
+        "to": "N0003"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 84.534,
+        "edge_key": "0",
+        "from": "N0015",
+        "length_m": 15.693,
+        "to": "N0018"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 160.575,
+        "edge_key": "0",
+        "from": "N0015",
+        "length_m": 168.705,
+        "to": "N0022"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 253.885,
+        "edge_key": "0",
+        "from": "N0016",
+        "length_m": 13.093,
+        "to": "N0013"
+      },
+      {
+        "action_id": "A04",
+        "bearing_deg": 341.566,
+        "edge_key": "0",
+        "from": "N0016",
+        "length_m": 14.183,
+        "to": "N0014"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 161.462,
+        "edge_key": "0",
+        "from": "N0016",
+        "length_m": 90.852,
+        "to": "N0019"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.557,
+        "edge_key": "0",
+        "from": "N0016",
+        "length_m": 304.212,
+        "to": "N0030"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 251.687,
+        "edge_key": "0",
+        "from": "N0017",
+        "length_m": 248.783,
+        "to": "N0001"
+      },
+      {
+        "action_id": "A04",
+        "bearing_deg": 344.611,
+        "edge_key": "0",
+        "from": "N0017",
+        "length_m": 91.783,
+        "to": "N0013"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 173.108,
+        "edge_key": "0",
+        "from": "N0017",
+        "length_m": 13.313,
+        "to": "N0018"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 74.154,
+        "edge_key": "0",
+        "from": "N0017",
+        "length_m": 18.42,
+        "to": "N0019"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 264.534,
+        "edge_key": "0",
+        "from": "N0018",
+        "length_m": 15.693,
+        "to": "N0015"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 353.108,
+        "edge_key": "0",
+        "from": "N0018",
+        "length_m": 13.313,
+        "to": "N0017"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 76.266,
+        "edge_key": "0",
+        "from": "N0018",
+        "length_m": 37.358,
+        "to": "N0021"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 341.462,
+        "edge_key": "0",
+        "from": "N0019",
+        "length_m": 90.852,
+        "to": "N0016"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 254.154,
+        "edge_key": "0",
+        "from": "N0019",
+        "length_m": 18.42,
+        "to": "N0017"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 79.091,
+        "edge_key": "0",
+        "from": "N0019",
+        "length_m": 16.086,
+        "to": "N0020"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 259.091,
+        "edge_key": "0",
+        "from": "N0020",
+        "length_m": 16.086,
+        "to": "N0019"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 157.975,
+        "edge_key": "0",
+        "from": "N0020",
+        "length_m": 12.195,
+        "to": "N0021"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.333,
+        "edge_key": "0",
+        "from": "N0020",
+        "length_m": 272.319,
+        "to": "N0031"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 256.266,
+        "edge_key": "0",
+        "from": "N0021",
+        "length_m": 37.358,
+        "to": "N0018"
+      },
+      {
+        "action_id": "A04",
+        "bearing_deg": 337.975,
+        "edge_key": "0",
+        "from": "N0021",
+        "length_m": 12.195,
+        "to": "N0020"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.667,
+        "edge_key": "0",
+        "from": "N0021",
+        "length_m": 16.162,
+        "to": "N0023"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 162.001,
+        "edge_key": "0",
+        "from": "N0021",
+        "length_m": 135.109,
+        "to": "N0024"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 340.575,
+        "edge_key": "0",
+        "from": "N0022",
+        "length_m": 168.705,
+        "to": "N0015"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 252.667,
+        "edge_key": "0",
+        "from": "N0023",
+        "length_m": 16.162,
+        "to": "N0021"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 163.766,
+        "edge_key": "0",
+        "from": "N0023",
+        "length_m": 135.866,
+        "to": "N0025"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 72.361,
+        "edge_key": "0",
+        "from": "N0023",
+        "length_m": 208.854,
+        "to": "N0026"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 342.001,
+        "edge_key": "0",
+        "from": "N0024",
+        "length_m": 135.109,
+        "to": "N0021"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 77.281,
+        "edge_key": "0",
+        "from": "N0024",
+        "length_m": 11.999,
+        "to": "N0025"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 343.766,
+        "edge_key": "0",
+        "from": "N0025",
+        "length_m": 135.866,
+        "to": "N0023"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 257.281,
+        "edge_key": "0",
+        "from": "N0025",
+        "length_m": 11.999,
+        "to": "N0024"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 252.361,
+        "edge_key": "0",
+        "from": "N0026",
+        "length_m": 208.854,
+        "to": "N0023"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 252.929,
+        "edge_key": "0",
+        "from": "N0027",
+        "length_m": 320.792,
+        "to": "N0009"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 171.199,
+        "edge_key": "0",
+        "from": "N0027",
+        "length_m": 14.575,
+        "to": "N0028"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 252.762,
+        "edge_key": "0",
+        "from": "N0028",
+        "length_m": 316.518,
+        "to": "N0010"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 351.199,
+        "edge_key": "0",
+        "from": "N0028",
+        "length_m": 14.575,
+        "to": "N0027"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 169.885,
+        "edge_key": "0",
+        "from": "N0028",
+        "length_m": 86.066,
+        "to": "N0029"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 252.453,
+        "edge_key": "0",
+        "from": "N0029",
+        "length_m": 307.986,
+        "to": "N0014"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 349.885,
+        "edge_key": "0",
+        "from": "N0029",
+        "length_m": 86.066,
+        "to": "N0028"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 175.161,
+        "edge_key": "0",
+        "from": "N0029",
+        "length_m": 15.11,
+        "to": "N0030"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 252.557,
+        "edge_key": "0",
+        "from": "N0030",
+        "length_m": 304.212,
+        "to": "N0016"
+      },
+      {
+        "action_id": "A03",
+        "bearing_deg": 355.161,
+        "edge_key": "0",
+        "from": "N0030",
+        "length_m": 15.11,
+        "to": "N0029"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 171.741,
+        "edge_key": "0",
+        "from": "N0030",
+        "length_m": 92.018,
+        "to": "N0031"
+      },
+      {
+        "action_id": "A01",
+        "bearing_deg": 252.333,
+        "edge_key": "0",
+        "from": "N0031",
+        "length_m": 272.319,
+        "to": "N0020"
+      },
+      {
+        "action_id": "A02",
+        "bearing_deg": 351.741,
+        "edge_key": "0",
+        "from": "N0031",
+        "length_m": 92.018,
+        "to": "N0030"
+      }
+    ],
+    "goal": "N0015",
+    "nodes": [
+      {
+        "id": "N0001",
+        "x_m": -183.243,
+        "y_m": -261.453
+      },
+      {
+        "id": "N0002",
+        "x_m": -144.548,
+        "y_m": -30.389
+      },
+      {
+        "id": "N0003",
+        "x_m": -126.546,
+        "y_m": -251.253
+      },
+      {
+        "id": "N0004",
+        "x_m": -34.329,
+        "y_m": 92.846
+      },
+      {
+        "id": "N0005",
+        "x_m": -33.444,
+        "y_m": -102.149
+      },
+      {
+        "id": "N0006",
+        "x_m": -23.31,
+        "y_m": 96.491
+      },
+      {
+        "id": "N0007",
+        "x_m": -9.307,
+        "y_m": 11.654
+      },
+      {
+        "id": "N0008",
+        "x_m": 0.0,
+        "y_m": 0.0
+      },
+      {
+        "id": "N0009",
+        "x_m": 3.782,
+        "y_m": 15.816
+      },
+      {
+        "id": "N0010",
+        "x_m": 11.852,
+        "y_m": 2.261
+      },
+      {
+        "id": "N0011",
+        "x_m": 21.103,
+        "y_m": -34.148
+      },
+      {
+        "id": "N0012",
+        "x_m": 21.739,
+        "y_m": -85.211
+      },
+      {
+        "id": "N0013",
+        "x_m": 26.08,
+        "y_m": -98.415
+      },
+      {
+        "id": "N0014",
+        "x_m": 34.205,
+        "y_m": -81.326
+      },
+      {
+        "id": "N0015",
+        "x_m": 37.095,
+        "y_m": -197.787
+      },
+      {
+        "id": "N0016",
+        "x_m": 38.687,
+        "y_m": -94.773
+      },
+      {
+        "id": "N0017",
+        "x_m": 49.731,
+        "y_m": -184.345
+      },
+      {
+        "id": "N0018",
+        "x_m": 51.193,
+        "y_m": -196.438
+      },
+      {
+        "id": "N0019",
+        "x_m": 67.073,
+        "y_m": -179.422
+      },
+      {
+        "id": "N0020",
+        "x_m": 82.828,
+        "y_m": -176.386
+      },
+      {
+        "id": "N0021",
+        "x_m": 87.363,
+        "y_m": -187.598
+      },
+      {
+        "id": "N0022",
+        "x_m": 92.306,
+        "y_m": -354.349
+      },
+      {
+        "id": "N0023",
+        "x_m": 102.729,
+        "y_m": -182.802
+      },
+      {
+        "id": "N0024",
+        "x_m": 128.392,
+        "y_m": -313.879
+      },
+      {
+        "id": "N0025",
+        "x_m": 140.124,
+        "y_m": -311.231
+      },
+      {
+        "id": "N0026",
+        "x_m": 301.836,
+        "y_m": -119.491
+      },
+      {
+        "id": "N0027",
+        "x_m": 310.17,
+        "y_m": 109.902
+      },
+      {
+        "id": "N0028",
+        "x_m": 312.398,
+        "y_m": 95.512
+      },
+      {
+        "id": "N0029",
+        "x_m": 327.407,
+        "y_m": 11.384
+      },
+      {
+        "id": "N0030",
+        "x_m": 328.68,
+        "y_m": -3.657
+      },
+      {
+        "id": "N0031",
+        "x_m": 341.781,
+        "y_m": -93.906
+      }
+    ],
+    "start": "N0008"
+  },
+  "metrics": {
+    "bearing_greedy_accuracy": 0.75,
+    "bearing_greedy_correct_count": 3,
+    "bearing_greedy_failure_count": 1,
+    "bearing_greedy_max_regret_ratio": 17.154491,
+    "bearing_greedy_mean_regret_ratio": 4.288623,
+    "corridor_edge_count": 80,
+    "corridor_node_count": 31,
+    "decision_count": 4,
+    "decision_load_bits": 5.169925,
+    "diagnostic_criteria_met": true,
+    "difficulty_score": 1.479985,
+    "difficulty_tier_diagnostic": "low",
+    "graph_input_size": {
+      "chars_per_token_assumption": 3.2,
+      "compact_json_chars": 1674,
+      "estimated_tokens": 524
+    },
+    "graph_input_size_proxy": {
+      "chars_per_token_assumption": 3.2,
+      "compact_json_chars": 1669,
+      "estimated_tokens": 522
+    },
+    "mean_log2_branch_factor": 1.292481,
+    "mean_near_optimal_lure": 0.187504,
+    "network_circuity": 1.109808,
+    "route_length_m": 223.333,
+    "sampling_stratum": "diagnostic",
+    "scale_tier": "small",
+    "straight_line_distance_m": 201.235
+  },
+  "oracle": {
+    "length_m": 223.333,
+    "node_path": [
+      "N0008",
+      "N0012",
+      "N0013",
+      "N0017",
+      "N0018",
+      "N0015"
+    ]
+  },
+  "quality": {
+    "builder_bbox_buffer_m": 300.0,
+    "exit_arm_bearing_tolerance_deg": 20.0,
+    "frozen_raw_graph": "raw_graphs/Toronto_Canada__easy__1079__070d862c53ec.graphml",
+    "frozen_raw_graph_sha256": "c45f9fd107a8a3986e7ce18085ad3ad700e6ef3e2c9e98ffeffa7f436a38e6bc",
+    "osm_bbox_wsen": [
+      -79.4091851,
+      43.7013341,
+      -79.3967309,
+      43.7143009
+    ],
+    "osm_download_utc": "2026-09-17T21:16:44.593252+00:00",
+    "passed_automatic_checks": true,
+    "physical_intersection_merge_distance_m": 8.0,
+    "source_goal_snap_distance_m": 5.389,
+    "source_oracle_boundary_clearance_m": 294.626,
+    "source_start_snap_distance_m": 2.463,
+    "warnings": []
+  },
+  "source": {
+    "city": "Toronto_Canada",
+    "commit": "561feb73b7b32088a69689ae063de794da35f0d1",
+    "dataset": "TurnBack",
+    "repository": "bghjmn32/EMNLP2025_Turnback",
+    "route_geojson_sha256": "3a7c0af9d9779656686801dc052a87bf6f15f8d1670595e98b2779a5c2208bdf",
+    "route_id": "1079",
+    "source_distance_m": 1045.3,
+    "source_duration_s": 752.6,
+    "tier": "easy"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "created_utc": "2026-09-18T15:43:19.905690+00:00",
+  "dataset_name": "LIA-Road-TB",
+  "difficulty_note": "Original TurnBack tiers are provenance only; main difficulty is continuous and conditional on scale.",
+  "execution_policy": {
+    "maximum_decision_calls_multiplier": 4,
+    "maximum_directed_state_visits": 3,
+    "maximum_path_stretch": 2.5,
+    "minimum_maximum_decision_calls": 20,
+    "state_counting_rule": "count total occurrences of (previous,current); terminate before acting on occurrence maximum_directed_state_visits + 1",
+    "terminal_precedence": "distance_limit, goal, loop"
+  },
+  "release_status": "complete",
+  "route_count": 90,
+  "sampling_design": {
+    "diagnostic_input_size_matching": true,
+    "diagnostic_selection": "pre-model heuristic-trap enrichment",
+    "matching_variables": [
+      "estimated compact graph tokens",
+      "corridor_node_count",
+      "corridor_edge_count"
+    ],
+    "representative_selection": "fixed-seed selection without greedy outcome optimization"
+  },
+  "selection_shortfalls": [],
+  "turnback_commit": "561feb73b7b32088a69689ae063de794da35f0d1",
+  "version": "0.2.0"
+}

@@ -1,0 +1,223 @@
+{
+  "dataset_id": "LIA-Road-TB-085",
+  "decisions": [
+    {
+      "branch_factor": 2,
+      "current": "N0046",
+      "normalized_second_best_margin": 0.129851,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 76.064,
+          "edge_length_m": 27.129,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0052"
+          ],
+          "next": "N0052",
+          "physical_edge_count": 1,
+          "q_m": 472.097,
+          "relative_turn_deg": -84.856,
+          "remaining_oracle_distance_m": 444.969
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 250.163,
+          "edge_length_m": 49.169,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0037"
+          ],
+          "next": "N0037",
+          "physical_edge_count": 1,
+          "q_m": 417.84,
+          "relative_turn_deg": 89.243,
+          "remaining_oracle_distance_m": 368.671
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0037",
+      "path_index": 1,
+      "physical_branch_factor": 2,
+      "previous": "N0044"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0037",
+      "normalized_second_best_margin": 0.038454,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 168.622,
+          "edge_length_m": 42.258,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0039"
+          ],
+          "next": "N0039",
+          "physical_edge_count": 1,
+          "q_m": 382.848,
+          "relative_turn_deg": -81.541,
+          "remaining_oracle_distance_m": 340.589
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 255.162,
+          "edge_length_m": 14.921,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0032"
+          ],
+          "next": "N0032",
+          "physical_edge_count": 1,
+          "q_m": 368.671,
+          "relative_turn_deg": 4.999,
+          "remaining_oracle_distance_m": 353.749
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0032",
+      "path_index": 2,
+      "physical_branch_factor": 2,
+      "previous": "N0046"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0032",
+      "normalized_second_best_margin": 0.03773,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 160.583,
+          "edge_length_m": 202.111,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0049"
+          ],
+          "next": "N0049",
+          "physical_edge_count": 1,
+          "q_m": 367.096,
+          "relative_turn_deg": -94.579,
+          "remaining_oracle_distance_m": 164.985
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 252.226,
+          "edge_length_m": 74.029,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0022"
+          ],
+          "next": "N0022",
+          "physical_edge_count": 1,
+          "q_m": 353.749,
+          "relative_turn_deg": -2.936,
+          "remaining_oracle_distance_m": 279.721
+        }
+      ],
+      "oracle_action_id": "A02",
+      "oracle_next": "N0022",
+      "path_index": 3,
+      "physical_branch_factor": 2,
+      "previous": "N0037"
+    },
+    {
+      "branch_factor": 2,
+      "current": "N0022",
+      "normalized_second_best_margin": 0.082947,
+      "options": [
+        {
+          "action_id": "A01",
+          "bearing_deg": 162.381,
+          "edge_length_m": 279.721,
+          "is_acceptable_oracle": true,
+          "is_reference_oracle": true,
+          "member_next": [
+            "N0035"
+          ],
+          "next": "N0035",
+          "physical_edge_count": 1,
+          "q_m": 279.721,
+          "relative_turn_deg": -89.845,
+          "remaining_oracle_distance_m": 0.0
+        },
+        {
+          "action_id": "A02",
+          "bearing_deg": 263.473,
+          "edge_length_m": 11.601,
+          "is_acceptable_oracle": false,
+          "is_reference_oracle": false,
+          "member_next": [
+            "N0020"
+          ],
+          "next": "N0020",
+          "physical_edge_count": 1,
+          "q_m": 302.923,
+          "relative_turn_deg": 11.247,
+          "remaining_oracle_distance_m": 291.322
+        }
+      ],
+      "oracle_action_id": "A01",
+      "oracle_next": "N0035",
+      "path_index": 4,
+      "physical_branch_factor": 2,
+      "previous": "N0032"
+    }
+  ],
+  "metrics": {
+    "bearing_greedy_accuracy": 0.5,
+    "bearing_greedy_correct_count": 2,
+    "bearing_greedy_failure_count": 2,
+    "bearing_greedy_max_regret_ratio": 0.038454,
+    "bearing_greedy_mean_regret_ratio": 0.019046,
+    "corridor_edge_count": 246,
+    "corridor_node_count": 81,
+    "decision_count": 4,
+    "decision_load_bits": 4.0,
+    "diagnostic_criteria_met": true,
+    "difficulty_score": 1.607498,
+    "difficulty_tier_diagnostic": "low",
+    "graph_input_size": {
+      "chars_per_token_assumption": 3.2,
+      "compact_json_chars": 4416,
+      "estimated_tokens": 1380
+    },
+    "graph_input_size_proxy": {
+      "chars_per_token_assumption": 3.2,
+      "compact_json_chars": 4411,
+      "estimated_tokens": 1379
+    },
+    "mean_log2_branch_factor": 1.0,
+    "mean_near_optimal_lure": 0.607498,
+    "network_circuity": 1.331527,
+    "route_length_m": 433.376,
+    "sampling_stratum": "diagnostic",
+    "scale_tier": "small",
+    "straight_line_distance_m": 325.473
+  },
+  "oracle": {
+    "length_m": 433.376,
+    "model_node_path": [
+      43,
+      45,
+      36,
+      31,
+      21,
+      34
+    ],
+    "node_path": [
+      "N0044",
+      "N0046",
+      "N0037",
+      "N0032",
+      "N0022",
+      "N0035"
+    ]
+  }
+}

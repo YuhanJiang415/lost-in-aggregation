@@ -8,7 +8,7 @@ A self-contained static project page for the benchmark
 docs/
 ├── index.html              # the page (inlined CSS + tiny JS, no build step)
 ├── assets/
-│   ├── figures/            # paper figures (PNG)
+│   ├── figures/            # paper figures (PNG); road_*.png are the street-network figures
 │   ├── mazes/              # rendered maze preview thumbnails (one per size)
 │   ├── gifs/               # animated navigation clips (robot walking the maze)
 │   └── robot.png           # robot sprite (rasterized from robot.svg)

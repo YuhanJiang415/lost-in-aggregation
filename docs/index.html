@@ -171,6 +171,7 @@
 
   /* ---------- TL;DR cards ---------- */
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .cards.four { grid-template-columns: repeat(2, 1fr); }
   .card {
     background: #fff;
     border: 1px solid var(--line);
@@ -273,7 +274,7 @@
   /* ---------- responsive ---------- */
   @media (max-width: 860px) {
     .stats { grid-template-columns: repeat(2, 1fr); }
-    .cards { grid-template-columns: 1fr; }
+    .cards, .cards.four { grid-template-columns: 1fr; }
     .two { grid-template-columns: 1fr; }
     .mazes { grid-template-columns: repeat(4, 1fr); }
     .feature { grid-template-columns: 1fr; gap: 22px; }
@@ -319,7 +320,7 @@
   <div class="wrap">
     <figure class="framed">
       <img src="assets/figures/framework_intro.png" alt="Conceptual framework comparing human and LLM spatial cognition, from input acquisition through spatial learning to route planning." loading="lazy" />
-      <figcaption><b>From spatial input to route planning.</b> The benchmark diagnoses LLM route planning by decomposing it into the same representational levels that structure human spatial cognition — <b style="color:var(--blue)">Fine</b> (local passability), <b style="color:var(--blue)">Meso</b> (junction topology), and <b style="color:var(--blue)">Macro</b> (global goal direction) — and probes each in isolation.</figcaption>
+      <figcaption><b>Conceptual framework</b> comparing human and LLM spatial cognition, from input acquisition through spatial learning to route planning. The benchmark separates local passability (<b style="color:var(--blue)">Fine</b>), junction topology (<b style="color:var(--blue)">Meso</b>), and goal orientation (<b style="color:var(--blue)">Macro</b>), and probes each spatial scale in isolation.</figcaption>
     </figure>
   </div>
 </section>
@@ -344,23 +345,28 @@
 <!-- ============================ TL;DR ============================ -->
 <section>
   <div class="wrap">
-    <h2 class="sec"><span class="kicker">Key Findings</span>Three modules, three questions</h2>
-    <p class="lead">The benchmark mirrors the route-planning pipeline: how space is <em>read in</em>, how it is <em>represented</em> across scales, and how control should be <em>divided</em> between an LLM and an algorithm.</p>
-    <div class="cards">
+    <h2 class="sec"><span class="kicker">Key Findings</span>Four modules, four questions</h2>
+    <p class="lead">Three modules mirror the route-planning pipeline — input acquisition, multi-scale representation, and hierarchical route planning — and a fourth tests transfer to real street networks.</p>
+    <div class="cards four">
       <div class="card">
         <div class="rq">RQ1 · INPUT ACQUISITION</div>
-        <h3>Coordinates are the best text encoding</h3>
-        <p>Among the text formats, structured <span class="punch">coordinate text is the strongest in aggregate</span> (mean SR 34%, vs. Words 27% and Map 15%); from a rendered image, GPT-4o solved no maze (0/150). Local moves stay legal even as whole-path success vanishes, so the collapse is one of <em>global path assembly</em>.</p>
+        <h3>Which input format best supports route planning?</h3>
+        <p>Among the three text formats, <span class="punch">structured Coordinate text is the strongest in aggregate</span> (mean SR 34%, vs. Words 27% and Map 15%). Picture was evaluated for GPT-4o only, which solved no maze from it (0/150). The models usually emit grid-legal local moves even when complete routes fail.</p>
       </div>
       <div class="card">
         <div class="rq">RQ2 · MULTI-SCALE REPRESENTATION</div>
-        <h3>Lost in aggregation</h3>
-        <p>At 10×10, complete-route success is 0–6% while isolated Fine / Meso / Macro probes stay at roughly 30–75%. First errors fall on <span class="punch">Meso (59%) and Fine (39%), almost never Macro (1%)</span>. Success on individual judgments does not ensure a successful <em>sequence</em>.</p>
+        <h3>Where do LLMs fail across spatial scales?</h3>
+        <p>At 10×10, one-shot success is 0–6% across models, while isolated-probe accuracy is roughly 30–75%. First errors occur mainly at the <span class="punch">Meso (59%) and Fine (39%)</span> scales, with Macro about 1%. Success on individual judgments does not ensure a successful sequence.</p>
       </div>
       <div class="card">
         <div class="rq">RQ3 · HIERARCHICAL ROUTE PLANNING</div>
-        <h3>Delegation helps, up to a size</h3>
-        <p>Handing per-step execution to a deterministic walker and querying the LLM only at junctions <span class="punch">lifts GPT-4o by 70–92 points</span> at 7×7 to 15×15 — but success declines by 20×20 and is near zero by 30×30.</p>
+        <h3>Which control should be delegated?</h3>
+        <p>Assigning corridor-walking and dead-end retreat to a deterministic algorithm and querying the model only at junctions <span class="punch">lifts GPT-4o by 70–92 percentage points</span> at 7×7 to 15×15. Delegation roughly doubles the navigable size, but performance still declines at larger sizes.</p>
+      </div>
+      <div class="card">
+        <div class="rq">RQ4 · STREET-NETWORK TRANSFER</div>
+        <h3>Does the gap carry over to real streets?</h3>
+        <p>On 90 OpenStreetMap routes, GPT-4o identified neighbors at 99.4% and chose junction exits at 64.7%, yet <span class="punch">only 13.3% of complete routes succeeded</span>. Of the 78 failed routes, 66 were stopped at a connection that does not exist in the street graph.</p>
       </div>
     </div>
   </div>
@@ -372,11 +378,11 @@
     <h2 class="sec"><span class="kicker">The Benchmark</span>Design at a glance</h2>
     <figure class="framed">
       <img src="assets/figures/framework_detail.png" alt="Benchmark overview: the maze corpus, the three maze modules, the transfer to real street networks, and the metrics and failure-signature vocabulary." loading="lazy" />
-      <figcaption><b>Benchmark overview.</b> <b>&#9312; Input acquisition</b> — each maze is presented as Words, Coordinates, an ASCII Map, or an Image. <b>&#9313; Multi-scale representation</b> — one-shot route planning is decomposed into Fine / Meso / Macro, each probed in isolation. <b>&#9314; Hierarchical route planning</b> — One-shot, Topology-blind Junction, and Topology-aided Junction delegation regimes. <b>&#9315; Transfer to real street networks</b> — the analogous isolated judgments (neighbor identification, junction choice) and the complete-route task on 90 OpenStreetMap routes. Trials are scored by success and a failure-signature vocabulary.</figcaption>
+      <figcaption><b>Benchmark overview:</b> the maze corpus, the three maze modules, and the metrics and failure-signature vocabulary. A corpus of mazes (left) is presented through one of four input formats (module &#9312;). Route planning is decomposed into three spatial scales probed in isolation (module &#9313;). Three delegation regimes compare how much control the LLM and an algorithm hold (module &#9314;). Trials are scored by success and by a failure-signature vocabulary (right). Module &#9315; applies analogous isolated judgments (neighbor identification and junction choice) and the complete-route task to real street networks.</figcaption>
     </figure>
 
     <div style="margin-top:30px">
-      <p class="lead" style="margin-bottom:14px">Mazes are 2-D grids generated by a mix of depth-first-search (long corridors) and randomized Prim (many branches), with fixed seeds for reproducibility. By construction they are <b>trees</b>: any two cells are connected by a unique path, so every junction choice is unambiguously right or wrong. Every maze ships with per-cell passable directions, cell types, the shortest path, and the goal-reaching branch at each junction.</p>
+      <p class="lead" style="margin-bottom:14px">Mazes are standard two-dimensional grids generated by a mix of depth-first-search (long corridors) and randomized Prim (many branches), with fixed seeds for reproducibility. By construction they are <b>trees</b>: any two open cells are connected by a unique path and there are no cycles, so every junction choice is unambiguously right or wrong. Difficulty (easy / medium / hard) is controlled by the number of decision points on the solution path, dead-end density, and a confusion ratio. Every maze is pre-annotated with per-cell passable directions and cell types; along the solution path, annotations include the ideal heading and the goal-reaching branch at each junction.</p>
     </div>
   </div>
 </section>
@@ -416,7 +422,7 @@
       <div>
         <h3 style="font-size:20px; margin:0 0 8px">Solving it</h3>
         <p style="color:var(--muted); margin:0 0 14px">When the robot keeps Fine, Meso, and Macro reasoning aligned step after step, it follows the unique path from <b style="color:var(--blue)">S</b> to <b style="color:var(--red)">G</b>. On small mazes the models manage this; the benchmark's question is what breaks as the maze grows.</p>
-        <p style="color:var(--muted); margin:0">The three clips below replay the dominant ways route planning falls apart — the same failure signatures our first-error analysis counts: <b>Meso junction choices (59%)</b> and <b>Fine local execution (39%)</b>.</p>
+        <p style="color:var(--muted); margin:0">The three clips below replay the dominant ways route planning falls apart — the same failure signatures our first-error analysis counts: <b>Meso topological choices (59%)</b> and <b>Fine local execution (39%)</b>.</p>
       </div>
     </div>
 
@@ -424,7 +430,7 @@
       <div class="gifcard">
         <img class="gif" src="assets/gifs/nav_err_wrong_turn.gif" alt="Robot takes the wrong branch at a junction and ends in a dead-end." loading="lazy" />
         <h4>Wrong junction <span class="lvl meso">MESO</span></h4>
-        <p>At a branch point the robot picks a decoy branch (green arrow marks the goal-reaching one) and dies in a dead-end. The single most common first error.</p>
+        <p>At a branch point the robot picks a decoy branch (green arrow marks the goal-reaching one) and ends in a dead end. Wrong junction branches are the Meso first errors, the largest share overall.</p>
       </div>
       <div class="gifcard">
         <img class="gif" src="assets/gifs/nav_err_wall_hit.gif" alt="Robot lunges into a wall." loading="lazy" />
@@ -434,7 +440,7 @@
       <div class="gifcard">
         <img class="gif" src="assets/gifs/nav_err_teleport.gif" alt="Robot teleports to a non-adjacent cell." loading="lazy" />
         <h4>Teleport <span class="lvl fine">FINE</span></h4>
-        <p>The robot jumps to a non-adjacent cell, losing track of its own position — the most frequent Fine error at larger sizes.</p>
+        <p>The robot jumps to a non-adjacent cell, a teleport. Fine degradation is dominated by teleports, not wall hits.</p>
       </div>
     </div>
   </div>
@@ -448,27 +454,27 @@
     <div class="figrow">
       <figure class="framed">
         <img src="assets/figures/exp1_format_robust.png" alt="Success rate and valid-move ratio for four input formats across three models and three maze sizes." loading="lazy" />
-        <figcaption><b>RQ1.</b> Pooled over models, structured coordinate input yields the highest success among text formats at every maze size. Picture input is shown for GPT-4o only; DeepSeek-V3.1 and Llama-3.3-70B accept text only. Valid-move ratio stays high even where success rate is near zero — the failure is global path assembly, not local legality.</figcaption>
+        <figcaption><b>RQ1.</b> Pooled over models, structured coordinate input yields the highest success among text formats at every maze size. (<b>a</b>) SR pooled over maze sizes (n = 150 per bar); (<b>b</b>) SR by maze size for each model; (<b>c</b>) VMR pooled over maze sizes. Picture is shown for GPT-4o only; DeepSeek-V3.1 and Llama-3.3-70B-Instruct accept text input only and did not receive the image. VMR stays high for every reported model–format pair, even where SR is near zero.</figcaption>
       </figure>
 
       <figure class="framed">
         <img src="assets/figures/exp2_one-hot_isolated_main.png" alt="End-to-end route planning declines more steeply with maze size than isolated probe accuracy." loading="lazy" />
-        <figcaption><b>RQ2.</b> End-to-end route planning declines more steeply with maze size than isolated probe accuracy. At 10×10, one-shot success is 0–6% across models while isolated probes stay at roughly 30–75%. The coupled Meso×Macro probe declines from 67% at 3×3 to about 40% at 20×20–30×30.</figcaption>
+        <figcaption><b>RQ2.</b> End-to-end route planning declines more steeply with maze size than isolated probe accuracy. The 25% chance line applies to four-choice questions; junction-branch chance varies with the number of choices. At 10×10, one-shot success is 0–6% across models, while isolated-probe accuracy is roughly 30–75%.</figcaption>
       </figure>
 
       <figure class="framed">
         <img src="assets/figures/exp2_One-shot_Nav_First_Error_Analysis.png" alt="First-error composition of failed one-shot route planning across the Fine, Meso and Macro spatial scales." loading="lazy" />
-        <figcaption><b>First-error analysis.</b> Over 1,484 failed trials, the compositional centroid sits at Fine ≈39%, Meso ≈59%, Macro ≈1%: first errors are dominated by Meso topological choices and Fine local execution, and global direction is almost never the first thing to fail.</figcaption>
+        <figcaption><b>First errors.</b> First-error composition of failed one-shot route planning across the Fine, Meso and Macro spatial scales (n = 1,484 failed trials). For the compositional centroid, each trial’s weight is divided equally among the spatial scales triggered by its first error. The centroid is Fine ≈ 39%, Meso ≈ 59%, Macro ≈ 1%: global direction is almost never the first aspect of route planning to fail.</figcaption>
       </figure>
 
       <figure class="framed">
         <img src="assets/figures/exp2_coupling_ladder.png" alt="Coupling ladder: accuracy retention and above-chance score for five rungs of cognitive coupling across maze sizes." loading="lazy" />
-        <figcaption><b>Coupling ladder.</b> <b>a</b> — The gap persists after normalizing each task to its 3×3 performance. <b>b</b> — Accuracy above complete-route success is not the same as accuracy above chance: at large sizes Meso approaches its 50% guessing baseline, and at 30×30 Macro retains an above-chance score of about 22% and coupled Meso×Macro about 11%.</figcaption>
+        <figcaption><b>Coupling ladder.</b> (<b>a</b>) Accuracy retention and (<b>b</b>) above-chance score for five rungs of cognitive coupling across maze sizes. The gap persists after normalization to each task’s 3×3 performance. However, isolated accuracy above complete-route success does not necessarily imply accuracy above chance: at large maze sizes Meso approaches its 50% guessing baseline, and at 30×30 Macro retains a normalized above-chance score of about 22% and coupled Meso×Macro about 11%.</figcaption>
       </figure>
 
       <figure class="framed">
         <img src="assets/figures/exp3_junction_blind_aided_delegation.png" alt="Route-planning success under three delegation regimes, and the junction-delegation gain by model and maze size." loading="lazy" />
-        <figcaption><b>RQ3.</b> Junction-level delegation with an explicit topological prompt lifts GPT-4o from a one-shot 2/0/0% to 94/80/70% at sizes 7/10/15, and DeepSeek-V3.1 from 28/6/0% to 80/56/30%. Recovery remains limited by maze size: success declines by 20×20 and falls to near zero by 30×30 (both exploratory, n &lt; 50). Delegation roughly doubles the navigable size, but performance still declines at larger sizes.</figcaption>
+        <figcaption><b>RQ3.</b> Route-planning success under three delegation regimes, and the junction-delegation gain by model and maze size; hollow markers denote exploratory cells with n &lt; 50. Under Topology-aided delegation, GPT-4o rises from a one-shot SR of 2/0/0% at 7/10/15 to 94/80/70%, and DeepSeek-V3.1 from 28/6/0% to 80/56/30%; Topology-blind barely improves SR. Recovery remains limited by maze size: SR declines by 20×20 and falls to near zero by 30×30.</figcaption>
       </figure>
     </div>
   </div>
@@ -477,30 +483,33 @@
 <!-- ============================ REAL STREET NETWORKS ============================ -->
 <section id="road" class="alt">
   <div class="wrap">
-    <h2 class="sec"><span class="kicker">External Validation</span>Beyond mazes: real street networks</h2>
-    <p class="lead">Does the gap between isolated judgments and whole-route success survive outside fully observable tree mazes? We rebuilt the same three probes on OpenStreetMap pedestrian networks in Munich, Tokyo, and Toronto, where graphs have cycles and a junction can have more than one near-optimal exit.</p>
+    <h2 class="sec"><span class="kicker">Module 4 · RQ4</span>Transfer to real street networks</h2>
+    <p class="lead">Module 4 tests whether the gap between route planning and isolated judgments carries over from tree mazes to cyclic urban street graphs: OpenStreetMap pedestrian networks for Munich, Tokyo, and Toronto. All street-network results are for GPT-4o.</p>
 
     <div class="stats" style="margin-bottom:34px">
       <div class="stat"><div class="num">90</div><div class="lab">walking routes</div></div>
       <div class="stat"><div class="num">663</div><div class="lab">decision junctions</div></div>
-      <div class="stat"><div class="num">3</div><div class="lab">cities &times; 3 route scales</div></div>
+      <div class="stat"><div class="num">3</div><div class="lab">cities &times; 3 junction-count strata</div></div>
       <div class="stat"><div class="num">3&ndash;12</div><div class="lab">junctions per route</div></div>
     </div>
 
     <div class="figrow">
       <figure class="framed">
         <img src="assets/figures/road_cities_examples.png" alt="Street-network patches, orientation distributions, and example routes for Munich, Tokyo, and Toronto at three route scales." loading="lazy" />
-        <figcaption><b>Three cities, three scales.</b> Street-network patches and orientation distributions (<i>H</i>, orientation entropy; <i>&phi;</i>, orientation order) for Munich, Tokyo, and Toronto, each with one small (3&ndash;5 decision junctions), medium (6&ndash;8), and large (9&ndash;12) routing instance. Origin&ndash;destination pairs come from the TurnBack corpus; graphs, reference shortest paths, and decision junctions were rebuilt independently with OSMnx.</figcaption>
+        <figcaption><b>Routes.</b> Street-network patches, orientation distributions (<i>H</i>, orientation entropy; <i>&phi;</i>, orientation order) and example routing instances for Munich, Tokyo and Toronto (rows) in three junction-count strata (columns). The 3&ndash;5, 6&ndash;8, and 9&ndash;12 strata are labeled small, medium, and large. Each route is a segment of the recomputed shortest path between an origin&ndash;destination pair from the TurnBack route corpus.</figcaption>
       </figure>
 
       <figure class="framed">
         <img src="assets/figures/road_results.png" alt="Isolated judgments, complete-route performance, and junction difficulty on real street networks." loading="lazy" />
-        <figcaption><b>The gap carries over (GPT-4o).</b> <b>a</b> &mdash; Neighbor identification (Fine) stays at 99.4% (659/663) and isolated junction choice (Meso &times; Macro) reaches 64.7% (429/663), yet one-shot route planning succeeds on only 13.3% of routes (12/90): 33.3% at 3&ndash;5 junctions, 3.3% beyond. <b>b, c</b> &mdash; Junction choice gets harder with more branches (72.6% &rarr; 54.4% &rarr; 48.7%) and easier as the best exit pulls away from the runner-up in route cost (47.5% &rarr; 57.0% &rarr; 89.6% across margin tertiles).</figcaption>
+        <figcaption><b>Results.</b> Isolated judgments, complete-route performance and junction difficulty on real street networks (GPT-4o). (<b>a</b>) Neighbor identification reached 99.4% accuracy (659/663) and isolated junction choice 64.7% (429/663), whereas one-shot SR was only 13.3% (12/90); SR fell from 33.3% to 3.3% in both larger strata. (<b>b</b>) Junction-choice accuracy decreased from 72.6% with two available branches to 54.4% with three and 48.7% with four or more, but the branch-aware random baseline fell in parallel. (<b>c</b>) Across increasing cost-margin tertiles, accuracy rose from 47.5% to 57.0% and 89.6%.</figcaption>
       </figure>
     </div>
 
     <div class="callout">
-      Two cautions on reading these numbers. Junction choice beats the branch-aware chance level in every scale, but it stays <b>below a simple bearing-greedy heuristic</b> (64.7% vs. 77.4%), so above-chance accuracy is not evidence of an advantage over a basic spatial rule. And the branch-count and cost-margin associations are exploratory: they describe which isolated junctions are hard, not why complete routes fail.
+      <b>How complete routes fail.</b> Of the 78 failed routes, 66 were stopped at a connection that does not exist in the street graph; in 46 of these 66, the illegal step was the final one and landed on the destination. Seventy of the 78 failed routes would pass endpoint checks (output format, origin, destination, and node identifiers), so these failures are detectable only by checking the route against the network.
+    </div>
+    <div class="callout">
+      Junction choice exceeded the branch-aware random baseline in each of the three junction-count strata, although its pooled accuracy remained <b>below the bearing-greedy heuristic</b> (64.7% versus 77.4%). Above-chance performance therefore does not establish an advantage over a simple spatial heuristic. The branch-count and cost-margin results are exploratory and describe the difficulty of isolated junction choice.
     </div>
   </div>
 </section>
@@ -581,7 +590,7 @@
 
     <div style="overflow-x:auto; margin-top:18px"><table class="dl">
       <thead>
-        <tr><th>Scale</th><th>Decision junctions per route</th><th class="num">Routes</th><th class="num">Junctions</th><th class="num">Median nodes</th><th class="num">Median length</th></tr>
+        <tr><th>Stratum</th><th>Decision junctions per route</th><th class="num">Routes</th><th class="num">Junctions</th><th class="num">Median nodes</th><th class="num">Median length</th></tr>
       </thead>
       <tbody>
         <tr><td>Small</td><td>3&ndash;5</td><td class="num">30</td><td class="num">121</td><td class="num">36.5</td><td class="num">280 m</td></tr>
@@ -591,7 +600,7 @@
     </table></div>
 
     <div class="callout">
-      Each city &times; scale cell holds 10 routes: 5 representative and 5 diagnostic (enriched, before any model was run, for junctions where a bearing-greedy heuristic goes wrong). Exits within 5 m or 1% of the best route cost all count as correct, so a junction can have more than one acceptable answer. Route scale is correlated with input length (Spearman 0.77 between junction count and estimated tokens); the release's audit report records this unmet balance check. Details are in the <a href="https://github.com/YuhanJiang415/lost-in-aggregation/blob/main/road_network/README.md">dataset README</a>.
+      Each city &times; stratum cell holds 10 routes: 5 chosen by a fixed pseudo-random rule and 5 chosen, before any model was run, from a diagnostic stratum in which a bearing-greedy heuristic errs or fails to reach the goal. Exits within 5 m or 1% of the best route cost all count as correct, so a junction can have more than one acceptable answer. Junction-count stratum is correlated with input length (Spearman 0.77 between junction count and estimated tokens); the release's audit report records this unmet balance check. Details are in the <a href="https://github.com/YuhanJiang415/lost-in-aggregation/blob/main/road_network/README.md">dataset README</a>.
     </div>
 
     <h3 style="margin:34px 0 12px; font-size:18px">Per-route input schema</h3>
